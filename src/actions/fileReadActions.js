@@ -14,6 +14,7 @@ export function addTransactions(newtransactions) {
 export function parseFile(data) {
 
     var transactions = [];
+    var accumulative = 0;
     var dateIndex = data.match(/Date:.*(?=\s)/);
     //var descriptionIndex = data.match(/Description:.*(?=\s)/);
     var descriptionIndex = data.match(/Description:.*\s/);
@@ -26,13 +27,16 @@ export function parseFile(data) {
         var transactionAmount = parseFloat(amountIndex[0].slice(8));
 
         data = data.slice(amountIndex.index + 1);
-
-        transactions.push({ date: transactionDate, dateString: transactionDate.format('DD/YY/YYYY'), description: transactionDescription, amount: transactionAmount });
+        transactions.unshift({ date: transactionDate, dateString: transactionDate.format('DD/MM/YYYY'), description: transactionDescription, amount: transactionAmount, accumulative: 0 });
 
         dateIndex = data.match(/Date:.*(?=\s)/);
         descriptionIndex = data.match(/Description:.*(?=\s)/);
         amountIndex = data.match(/Amount:.*\.[0-9]{2}/);
     }
+
+    transactions.map(transaction => {
+      transaction.accumulative = accumulative+=transaction.amount;
+    });
 
   return dispatch => {
     dispatch(addTransactions(transactions));

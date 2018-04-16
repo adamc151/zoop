@@ -5,17 +5,18 @@ import { LineChart, Line, XAxis, YAxis } from 'recharts';
 
 class Chart extends React.Component {
 
-  render() {
-    let data = [];
-    console.log(this.props.transactions);
-    var reversed = this.props.transactions.slice();
-    console.log(reversed.reverse());
-
-    return (<LineChart className="myChart" width={1000} height={400} data={reversed}>
+  renderLineChart(){
+    return (
+      <LineChart className="myChart" width={1000} height={400} data={this.props.transactions}>
       <XAxis dataKey="dateString"/>
       <YAxis />
       <Line type="monotone" dataKey="amount" stroke="#8884d8" />
+      <Line type="monotone" dataKey="accumulative" stroke="#8884d8" />
     </LineChart>)
+  }
+
+  render() {
+    return this.props.transactions.length > 0 ? (<div>{this.renderLineChart()}</div>) : null;
   }
 
 }
