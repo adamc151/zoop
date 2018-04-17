@@ -7,7 +7,7 @@ class TextWindow extends React.Component {
 
   renderData() {
     return (<div>{this.props.transations.map((transaction, i )=> {
-        return <div key={i}><div>{transaction.dateString}</div><div>{transaction.description}</div><div>{transaction.amount}</div></div>
+        return <div key={i}><div>{transaction.dateString}</div><div>{transaction.amount}</div><div>{transaction.accumulative}</div><div /></div>
       })}</div>)
   }
 
