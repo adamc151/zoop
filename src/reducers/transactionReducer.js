@@ -4,7 +4,7 @@ moment().toDate();
 
 //the initial store (global app state)
 let initialState = {
-    transactions: []
+    transactionsArray: []
 }
 
 
@@ -12,13 +12,15 @@ let initialState = {
 //When an action is called...the reducer checks the action type then basically does all the work depending on which action
 export default function transactions(state = initialState, action) {
 
+  console.log('transactions', state);
   let newState;
 
   switch (action.type) {
       case ADD_TRANSACTIONS:
         console.log('ADD_TRANSACTIONS Action')
-        newState = parseTransactionsFromTextFile(action.payload);
-        return newState;
+        newState  = { ...state, transactionsArray: parseTransactionsFromTextFile(action.payload)};
+        console.log('newState', newState);
+        return { ...state, transactionsArray: parseTransactionsFromTextFile(action.payload)};
     default:
       return state;
   }

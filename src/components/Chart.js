@@ -9,7 +9,6 @@ class Chart extends React.Component {
     return (
       <LineChart className="myChart" width={1000} height={400} data={this.props.transactions}>
       <XAxis dataKey="dateString"/>
-      <YAxis />
       <Line type="monotone" dataKey="amount" stroke="#8884d8" />
       <Line type="monotone" dataKey="accumulative" stroke="#8884d8" />
     </LineChart>)
@@ -27,7 +26,7 @@ this.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    transactions: state.transactions
+    transactions: state.transactions.transactionsArray
   };
 }
 
