@@ -1,6 +1,14 @@
-.half {
-  width: 1040px;
+.accordionContainer {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.accordionTab {
+  width: 90%;
   margin: 0 auto;
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 15px 0 rgba(0,0,0,0.2);
 }
 
 .openTabRadio, .closeTabRadio {
@@ -26,14 +34,11 @@ label {
 .tab-content {
   max-height: 0;
   overflow: scroll;
-  border: solid 1px #3498db;
   -webkit-transition: max-height .35s;
   -o-transition: max-height .35s;
   transition: max-height .35s;
 }
 
-.blue .tab-content {
-}
 
 .tab-content p {
   margin: 1em;
