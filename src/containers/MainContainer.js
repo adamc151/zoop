@@ -14,6 +14,7 @@ import InOutNet from '../components/InOutNet/InOutNet.js';
 class MainContainer extends React.Component {
 
   render(){
+
     const { allTransactions, transactions, income, spending, net } = this.props;
 
     let initialStartDate = null;
@@ -33,10 +34,14 @@ class MainContainer extends React.Component {
       <Accordian transactions={transactions} />
       </div>);
   }
-
 }
 
 
+
+/***********************
+The code below assigns attributes in the store to the props of this container.
+So we can then access then via this.props.nameOfAttribute
+************************/
 function mapStateToProps(state) {
   return {
     allTransactions: state.allTransactions,
