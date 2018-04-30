@@ -4,6 +4,7 @@ import './App.css';
 import FileSelector from './components/FileSelector';
 import TextWindow from './components/TextWindow';
 import Chart from './components/Chart';
+import MonthlyChart from './components/MonthlyChart';
 import Accordian from './components/Accordian/Accordian.js'
 
 
@@ -17,6 +18,7 @@ class App extends Component {
         </header>
         <FileSelector />
         <Chart />
+        <MonthlyChart />
         <Accordian />
       </div>
     );
