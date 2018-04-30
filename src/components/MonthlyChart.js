@@ -1,15 +1,18 @@
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 class MonthlyChart extends React.Component {
 
   renderLineChart(){
     return (
     <BarChart className="myChart" width={1000} height={400} data={this.props.monthlyTransactions}>
+      <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date" />
       <YAxis />
+      <Tooltip />
+      <Legend />
       <Bar dataKey="net" fill="#82ca9d" />
     </BarChart>)
   }
