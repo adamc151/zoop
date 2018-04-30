@@ -12,7 +12,7 @@ class MonthlyChart extends React.Component {
       <XAxis dataKey="date" />
       <YAxis unit={" £"}/>
       <Tooltip isAnimationActive={false}/>
-      <Legend />
+      {/* <Legend /> */}
       <Bar dataKey="net" fill="#ff751a" />
     </BarChart>)
   }
