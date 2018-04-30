@@ -7,13 +7,13 @@ class MonthlyChart extends React.Component {
 
   renderLineChart(){
     return (
-    <BarChart className="myChart" width={1000} height={400} data={this.props.monthlyTransactions}>
+    <BarChart className="myChart" width={1500} height={500} data={this.props.monthlyTransactions}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date" />
-      <YAxis />
+      <YAxis unit={" £"}/>
       <Tooltip isAnimationActive={false}/>
       <Legend />
-      <Bar dataKey="net" fill="#82ca9d" />
+      <Bar dataKey="net" fill="#ff751a" />
     </BarChart>)
   }
 
