@@ -11,7 +11,7 @@ class MonthlyChart extends React.Component {
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date" />
       <YAxis />
-      <Tooltip />
+      <Tooltip isAnimationActive={false}/>
       <Legend />
       <Bar dataKey="net" fill="#82ca9d" />
     </BarChart>)
