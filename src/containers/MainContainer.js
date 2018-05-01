@@ -31,8 +31,8 @@ class MainContainer extends React.Component {
       <FileSelector />
       <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
       <Chart transactions={transactions} />
-      <InOutNet income={income} spending={spending} net={net} />
       <MonthlyChart />
+      <InOutNet income={income} spending={spending} net={net} />
       <Accordian transactions={transactions} />
       </div>);
   }

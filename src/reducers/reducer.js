@@ -1,6 +1,7 @@
 import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
+var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 //the initial store (global app state)
 let initialState = {
@@ -45,7 +46,7 @@ export default function transactions(state = initialState, action) {
         return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
       case ADD_MONTHLY_TRANSACTIONS:
         console.log('ADD_MONTHLY_TRANSACTIONS Action');
-        return { ...state, monthlyTransactionsArray: calculate(action.payload)};
+        return { ...state, monthlyTransactionsArray: calculateMonthlyNetValues(action.payload)};
     default:
       return state;
   }
@@ -110,10 +111,7 @@ function getTransactionsInRange(transactions, rangeObject){
   return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: input + output };
 }
 
-
-var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-function calculate(file) {
+function calculateMonthlyNetValues(file) {
 
     transactions = parseTransactionsFromTextFile(file);
 
@@ -133,7 +131,7 @@ function calculate(file) {
             total+=element.amount;
         }
         else{
-            monthValues.push({ date: monthMap[prevMonth-1] + ' ' + prevYear, net: Math.round(total*100)/100 /*element.date.format('DD/MM/YYYY') , month: prevMonth, year: prevYear*/});
+            monthValues.push({ date: monthMap[prevMonth-1] + ' ' + prevYear, net: Math.round(total*100)/100 });
             total=element.amount;
         }
 
@@ -141,6 +139,29 @@ function calculate(file) {
         prevYear = currentYear;
     });
 
-    // return reverseAndAddDifference(monthValues);
+    return reverseAndAddDifference(monthValues);
+    // return monthValues;
+}
+
+function reverseAndAddDifference(monthValues){
+    
+    // monthValues.reverse();
+    var prev = monthValues[0].net;
+    var total = 0;
+    var i=0;
+
+    monthValues.forEach(function(element){
+        // element.diff = ((prev - element.net)/((element.net + prev)/2))*100 + '%';
+        element.diff = Math.round((element.net - prev)*100)/100;
+        prev = element.net;
+        if(i>1){
+            total+=element.net;
+        }
+        i++
+    });
+
     return monthValues;
+    
+    console.log(monthValues);
+    console.log(total/(monthValues.length-2));
 }
