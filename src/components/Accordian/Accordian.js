@@ -1,6 +1,8 @@
 import {connect} from 'react-redux';
 import React from 'react';
 import AccordianItem from './AccordianItem';
+import './Accordian.css';
+
 
 class Accordian extends React.Component {
 
@@ -19,8 +21,8 @@ class Accordian extends React.Component {
   render() {
 
     return (
-      <div className="half">
-        <div className="tab blue">
+      <div className="accordionContainer">
+        <div className="accordionTab">
 
             <input id="openTab" type="radio" name="tabs1" className="openTabRadio" />
             <input id="closeTab" type="radio" name="tabs1" className="closeTabRadio" />
@@ -41,7 +43,7 @@ class Accordian extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    transactions: state.transactions.transactionsArray
+    transactions: state.transactionsInRange
   };
 }
 
