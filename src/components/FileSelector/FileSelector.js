@@ -22,6 +22,7 @@ class FileSelector extends React.Component {
 
 				reader.onload = () => {
           this.props.actions.addTransactions(reader.result);
+          this.props.actions.addMonthlyTransactions(reader.result);
 				}
 
 				reader.readAsText(file);

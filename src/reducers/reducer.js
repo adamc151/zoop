@@ -1,4 +1,4 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE } from '../actions/actions';
+import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
 
@@ -6,6 +6,7 @@ moment().toDate();
 let initialState = {
     allTransactions: [],
     transactionsInRange: [],
+    monthlyTransactionsArray: [],
     income: null,
     spending: null,
     net: null
@@ -42,11 +43,13 @@ export default function transactions(state = initialState, action) {
         console.log('GET_TRANSACTIONS_IN_RANGE Action');
         newState = getTransactionsInRange(state.allTransactions, action.payload);
         return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
+      case ADD_MONTHLY_TRANSACTIONS:
+        console.log('ADD_MONTHLY_TRANSACTIONS Action');
+        return { ...state, monthlyTransactionsArray: calculate(action.payload)};
     default:
       return state;
   }
 }
-
 
 
 
@@ -86,10 +89,6 @@ function parseTransactionsFromTextFile(file){
   return transactions;
 }
 
-
-
-
-
 function getTransactionsInRange(transactions, rangeObject){
 
   var input = 0;
@@ -109,4 +108,39 @@ function getTransactionsInRange(transactions, rangeObject){
   });
 
   return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: input + output };
+}
+
+
+var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function calculate(file) {
+
+    transactions = parseTransactionsFromTextFile(file);
+
+    var currentMonth = transactions[0].date.format('M');
+    var prevMonth = transactions[0].date.format('M');
+    var currentYear = transactions[0].date.format('Y');
+    var prevYear = transactions[0].date.format('Y');
+    var monthValues = [];
+    var total=0;
+
+    transactions.forEach(function(element){
+        
+        currentMonth = element.date.format('M');
+        currentYear = element.date.format('Y');
+        
+        if(currentMonth == prevMonth && element!=transactions[transactions.length-1]){
+            total+=element.amount;
+        }
+        else{
+            monthValues.push({ date: monthMap[prevMonth-1] + ' ' + prevYear, net: Math.round(total*100)/100 /*element.date.format('DD/MM/YYYY') , month: prevMonth, year: prevYear*/});
+            total=element.amount;
+        }
+
+        prevMonth = currentMonth;
+        prevYear = currentYear;
+    });
+
+    // return reverseAndAddDifference(monthValues);
+    return monthValues;
 }

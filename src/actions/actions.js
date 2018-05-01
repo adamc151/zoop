@@ -1,6 +1,7 @@
 //ACTION TYPES - used to label each action
 export const ADD_TRANSACTIONS = 'ADD_TRANSACTIONS';
 export const GET_TRANSACTIONS_IN_RANGE = 'GET_TRANSACTIONS_IN_RANGE';
+export const ADD_MONTHLY_TRANSACTIONS = 'ADD_MONTHLY_TRANSACTIONS';
 
 
 //ACTIONSSSS - these basically label the input argument
@@ -11,4 +12,8 @@ export function addTransactions(file) {
 
 export function getTransactionsInRange(startDate, endDate) {
   return {type: GET_TRANSACTIONS_IN_RANGE, payload: { startDate: startDate, endDate: endDate }};
+}
+
+export function addMonthlyTransactions(file) {
+  return {type: ADD_MONTHLY_TRANSACTIONS, payload: file};
 }
