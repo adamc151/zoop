@@ -13,7 +13,7 @@ class MonthlyChart extends React.Component {
             <ComposedChart className="myChart" data={this.props.monthlyTransactions} margin={{top: 30, right: 30, bottom: 30, left: 30}} >
               <XAxis dataKey="date" />
               <YAxis unit={" £"}/>
-              <Tooltip />
+              <Tooltip isAnimationActive={false}/>
               <Legend />
               <Bar dataKey="SavingsPerMonth" fill="#ff751a" />
               <Area type="monotone" dataKey="DifferenceSinceLastMonth" fill="#8884d8" stroke="#8884d8" />
