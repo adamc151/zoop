@@ -35,13 +35,6 @@ class FileDrop extends React.Component {
               <p>Drop a bank statement here!</p>
             </Dropzone>
           </div>
-          <aside>
-            <ul>
-              {
-                this.state.files.map(f => <li key={f.name}></li>)   
-              }
-            </ul>
-          </aside>
         </section>
       );
     }
