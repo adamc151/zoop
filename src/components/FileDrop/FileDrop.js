@@ -21,6 +21,7 @@ class FileDrop extends React.Component {
         reader.onload = (event) => {
             console.log(event.target.result);
             this.props.actions.addTransactions(reader.result);
+            this.props.actions.addMonthlyTransactions(reader.result);
         };
 
         reader.readAsText(file);
