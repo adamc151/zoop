@@ -15,8 +15,8 @@ class MonthlyChart extends React.Component {
               <YAxis unit={" £"}/>
               <Tooltip />
               <Legend />
-              <Bar dataKey="net" fill="#ff751a" />
-              <Area type="monotone" dataKey="diff" fill="#8884d8" stroke="#8884d8" />
+              <Bar dataKey="SavingsPerMonth" fill="#ff751a" />
+              <Area type="monotone" dataKey="DifferenceSinceLastMonth" fill="#8884d8" stroke="#8884d8" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>

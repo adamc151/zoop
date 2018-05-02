@@ -131,7 +131,7 @@ function calculateMonthlyNetValues(file) {
             total+=element.amount;
         }
         else{
-            monthValues.push({ date: monthMap[prevMonth-1] + ' ' + prevYear, net: Math.round(total*100)/100 });
+            monthValues.push({ date: monthMap[prevMonth-1] + ' ' + prevYear, SavingsPerMonth: Math.round(total*100)/100 });
             total=element.amount;
         }
 
@@ -146,16 +146,16 @@ function calculateMonthlyNetValues(file) {
 function reverseAndAddDifference(monthValues){
     
     // monthValues.reverse();
-    var prev = monthValues[0].net;
+    var prev = monthValues[0].SavingsPerMonth;
     var total = 0;
     var i=0;
 
     monthValues.forEach(function(element){
-        // element.diff = ((prev - element.net)/((element.net + prev)/2))*100 + '%';
-        element.diff = Math.round((element.net - prev)*100)/100;
-        prev = element.net;
+        // element.DifferenceSinceLastMonth = ((prev - element.SavingsPerMonth)/((element.SavingsPerMonth + prev)/2))*100 + '%';
+        element.DifferenceSinceLastMonth = Math.round((element.SavingsPerMonth - prev)*100)/100;
+        prev = element.SavingsPerMonth;
         if(i>1){
-            total+=element.net;
+            total+=element.SavingsPerMonth;
         }
         i++
     });
