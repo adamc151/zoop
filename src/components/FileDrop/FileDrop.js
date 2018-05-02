@@ -32,7 +32,7 @@ class FileDrop extends React.Component {
         <section>
           <div className="dropzone">
             <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)}>
-              <p>Drop a bank statement here!</p>
+              <p className="inner">Drop a bank statement here!</p>
             </Dropzone>
           </div>
         </section>
