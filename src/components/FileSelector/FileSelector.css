@@ -31,3 +31,9 @@
 .inputfile + label * {
 	pointer-events: none;
 }
+
+svg {
+  width: 22px;
+  height: 100%;
+  fill: #ffffff;
+}
