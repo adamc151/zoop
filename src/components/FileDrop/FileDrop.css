@@ -1,0 +1,20 @@
+.dropzone {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.dropzoneBox{
+    width: 60%;
+    height: 150px;
+    border-style: dashed;
+    border-width: 4px;
+}
+
+.dropzoneActive{
+    background-color: #16a084c4;
+}
+  
