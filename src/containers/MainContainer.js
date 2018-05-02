@@ -28,8 +28,8 @@ class MainContainer extends React.Component {
 
     return (
       <div>
-      <FileSelector />
       <FileDrop />
+      <FileSelector />
       <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
       <Chart transactions={transactions} />
       <InOutNet income={income} spending={spending} net={net} />
