@@ -33,10 +33,10 @@ class MainContainer extends React.Component {
       <FileDrop />
       <FileSelector />
       <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
+      <Accordian transactions={transactions} />
+      <InOutNet income={income} spending={spending} net={net} />
       <Chart transactions={transactions} />
       <MonthlyChart />
-      <InOutNet income={income} spending={spending} net={net} />
-      <Accordian transactions={transactions} />
       </div>);
   }
 }
