@@ -17,14 +17,3 @@
 .dropzoneActive{
     background-color: #16a084c4;
 }
-
-.inputfile-1 + label {
-    color: #f1e5e6;
-    background-color: #d3394c;
-}
-
-svg {
-    width: 22px;
-    height: 100%;
-    fill: #ffffff;
-}
