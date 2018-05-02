@@ -1,7 +1,7 @@
 .fileSelector {
   width: 90%;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
