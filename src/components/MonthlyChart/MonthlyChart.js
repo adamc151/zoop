@@ -4,7 +4,7 @@ import React from 'react';
 import { ComposedChart, Bar, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
 import './MonthlyChart.css';
 
-class MonthlyChart extends React.Component {
+export default class MonthlyChart extends React.Component {
 
   renderLineChart(){
     return (
@@ -28,19 +28,3 @@ class MonthlyChart extends React.Component {
   }
 
 }
-
-this.propTypes = {
-  monthlyTransations: PropTypes.array
-};
-
-function mapStateToProps(state) {
-  return {
-    monthlyTransactions: state.monthlyTransactionsArray
-  };
-}
-
-
-export default connect(
-  mapStateToProps,
-  null
-)(MonthlyChart);

@@ -36,7 +36,7 @@ class MainContainer extends React.Component {
       <Accordian transactions={transactions} />
       <InOutNet income={income} spending={spending} net={net} />
       <Chart transactions={transactions} />
-      <MonthlyChart />
+      <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
       </div>);
   }
 }

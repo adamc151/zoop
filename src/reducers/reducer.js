@@ -1,4 +1,4 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS } from '../actions/actions';
+import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
 var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -46,7 +46,10 @@ export default function transactions(state = initialState, action) {
         return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
       case ADD_MONTHLY_TRANSACTIONS:
         console.log('ADD_MONTHLY_TRANSACTIONS Action');
-        return { ...state, monthlyTransactionsArray: calculateMonthlyNetValues(action.payload)};
+        return { ...state, monthlyTransactionsArray: calculateMonthlyNetValues(action.payload, null)};
+      case UPDATE_MONTHLY_TRANSACTIONS:
+        console.log('UPDATE_MONTHLY_TRANSACTIONS Action');
+        return { ...state, monthlyTransactionsArray: updateMonthlyNetValues(state.allTransactions, action.payload)};
     default:
       return state;
   }
@@ -111,9 +114,30 @@ function getTransactionsInRange(transactions, rangeObject){
   return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: input + output };
 }
 
-function calculateMonthlyNetValues(file) {
 
-    transactions = parseTransactionsFromTextFile(file);
+function updateMonthlyNetValues(transactions, rangeObject){
+
+    var input = 0;
+    var output = 0;
+    var accumulative = 0;
+    var transactionsInRange = [];
+  
+    transactions.map(transaction => {
+        if (transaction.date.isBetween(rangeObject.startDate, rangeObject.endDate, null, '[]')) {
+            transactionsInRange.push(transaction);
+        }
+    });
+
+    return calculateMonthlyNetValues(null, transactionsInRange);
+  }
+  
+
+
+function calculateMonthlyNetValues(file, transactions) {
+
+    if(!transactions){
+        transactions = parseTransactionsFromTextFile(file);
+    }
 
     var currentMonth = transactions[0].date.format('M');
     var prevMonth = transactions[0].date.format('M');
