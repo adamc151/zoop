@@ -1,12 +1,11 @@
-/* .fileSelector {
+.fileSelector {
   width: 90%;
   margin: 0 auto;
   margin-top: 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-} */
-
+}
 
 .inputfile {
 	width: 0.1px;
@@ -18,14 +17,14 @@
 }
 
 .inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: #16a084de;
-    display: inline-block;
-    cursor: pointer; /* "hand" cursor */
-    width: 300px;
-    margin-top: 20px;
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: #16a084de;
+  display: inline-block;
+  cursor: pointer; /* "hand" cursor */
+  width: 300px;
+  margin-top: 20px;
 }
 
 .inputfile:focus + label,
