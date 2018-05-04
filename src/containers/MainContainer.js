@@ -32,7 +32,7 @@ class MainContainer extends React.Component {
     return (
       <div>
         <FileDrop />
-        <FileSelector />
+        {/* <FileSelector /> */}
         <FileClear />
         <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
         <Accordian transactions={transactions} />

@@ -21,15 +21,17 @@
     height: 300px;
     border-style: dashed;
     border-width: 4px;
-
-    
 }
 
 .dropzoneActive{
-    background-color: #16a084c4;
+    background-color: #16a0846c;
 }
   
 .inner {
     font-size: 25px;
-    padding: 100px;
+    padding: 110px;
+}
+
+.dropzoneBox p:hover{
+    color: #16a084c4;
 }
