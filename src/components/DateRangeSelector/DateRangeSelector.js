@@ -64,34 +64,39 @@ class DateRangeSelector extends React.Component {
 
 
   render() {
-    return (
-      <div className="DateRangeSelector">
-      From: <DatePicker
-        selected={ this.state.startDate }
-        onChange={this.changeStartDate}
-        minDate={ this.state.minDate }
-        maxDate={ this.state.endDate }
-        dateFormat="DD/MM/YYYY"
-        className="startDatePicker"
-      />
-      To: <DatePicker
-        selected={ this.state.endDate }
-        onChange={this.changeEndDate}
-        minDate={ this.state.startDate }
-        maxDate={ this.state.maxDate }
-        dateFormat="DD/MM/YYYY"
-        className="endDatePicker"
-      />
-    </div>);
+
+    if(this.props.net){
+      return (
+        <div className="DateRangeSelector">
+        From: <DatePicker
+          selected={ this.state.startDate }
+          onChange={this.changeStartDate}
+          minDate={ this.state.minDate }
+          maxDate={ this.state.endDate }
+          dateFormat="DD/MM/YYYY"
+          className="startDatePicker"
+        />
+        To: <DatePicker
+          selected={ this.state.endDate }
+          onChange={this.changeEndDate}
+          minDate={ this.state.startDate }
+          maxDate={ this.state.maxDate }
+          dateFormat="DD/MM/YYYY"
+          className="endDatePicker"
+        />
+      </div>);
+    }else{
+      return null;
+    }
   }
 }
 
 
-function mapStateToProps(state) {
-  return {
-    transactions: state.allTransactions
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     transactions: state.allTransactions
+//   };
+// }
 
 function mapDispatchToProps(dispatch) {
   return {

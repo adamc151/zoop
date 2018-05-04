@@ -28,18 +28,22 @@ class FileDrop extends React.Component {
     }
   
     render() {
-      return (
-        <section>
-          <div className="dropzone">
-            <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)}>
-              <p className="inner">Drop a bank statement here! Or click to select...</p>
-            </Dropzone>
-          </div>
-        </section>
-      );
+
+      if(this.props.transactions==''){
+        return (
+          <section>
+            <div className="dropzone">
+              <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)}>
+                <p className="inner">Drop a bank statement here! Or click to select...</p>
+              </Dropzone>
+            </div>
+          </section>
+        );
+      }else{
+        return null;
+      }
     }
 }
-
 
 function mapDispatchToProps(dispatch) {
     return {
