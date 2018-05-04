@@ -31,14 +31,16 @@ class MainContainer extends React.Component {
 
     return (
       <div>
-      <FileDrop />
-      <FileSelector />
-      <FileClear />
-      <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
-      <Accordian transactions={transactions} />
-      <InOutNet income={income} spending={spending} net={net} />
-      <Chart transactions={transactions} />
-      <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
+        <FileDrop />
+        <FileSelector />
+        <FileClear />
+        <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
+        <Accordian transactions={transactions} />
+        <InOutNet income={income} spending={spending} net={net} />
+        <Chart transactions={transactions} />
+        <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
+        <br/>
+        <br/>
       </div>);
   }
 }

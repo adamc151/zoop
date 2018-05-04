@@ -5,7 +5,7 @@
 }
 
 .accordionTab {
-  width: 90%;
+  max-width: 70%;
   margin: 0 auto;
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 15px 0 rgba(0,0,0,0.2);

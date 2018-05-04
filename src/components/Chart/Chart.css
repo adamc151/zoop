@@ -6,7 +6,7 @@
 }
 
 .chartContainer {
-  width: 90%;
+  max-width: 70%;
   margin: 0 auto;
   margin-top: 20px;
   height: 400px;
