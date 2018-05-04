@@ -5,6 +5,7 @@
   "dependencies": {
     "history": "^4.7.2",
     "moment": "^2.22.1",
+    "npm": "^6.0.0",
     "react": "^16.3.1",
     "react-datepicker": "^1.4.1",
     "react-dom": "^16.3.1",

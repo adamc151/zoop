@@ -1,4 +1,4 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS } from '../actions/actions';
+import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS, CLEAR_ACTION } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
 var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -50,6 +50,9 @@ export default function transactions(state = initialState, action) {
       case UPDATE_MONTHLY_TRANSACTIONS:
         console.log('UPDATE_MONTHLY_TRANSACTIONS Action');
         return { ...state, monthlyTransactionsArray: updateMonthlyNetValues(state.allTransactions, action.payload)};
+    case CLEAR_ACTION:
+        console.log('CLEAR_ACTION Action');
+        return { ...state, monthlyTransactionsArray:[], allTransactions:[], transactionsInRange:[], income:null, output:null, net:null};
     default:
       return state;
   }

@@ -12,8 +12,7 @@ class FileClear extends React.Component {
     }
 
     handleFileClear(evt) {
-
-        alert('clearing file');
+        this.props.actions.clearStore();
     }
 
 
