@@ -1,11 +1,13 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE } from '../actions/actions';
+import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
+var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 //the initial store (global app state)
 let initialState = {
     allTransactions: [],
     transactionsInRange: [],
+    monthlyTransactionsArray: [],
     income: null,
     spending: null,
     net: null
@@ -42,11 +44,16 @@ export default function transactions(state = initialState, action) {
         console.log('GET_TRANSACTIONS_IN_RANGE Action');
         newState = getTransactionsInRange(state.allTransactions, action.payload);
         return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
+      case ADD_MONTHLY_TRANSACTIONS:
+        console.log('ADD_MONTHLY_TRANSACTIONS Action');
+        return { ...state, monthlyTransactionsArray: calculateMonthlyNetValues(action.payload, null)};
+      case UPDATE_MONTHLY_TRANSACTIONS:
+        console.log('UPDATE_MONTHLY_TRANSACTIONS Action');
+        return { ...state, monthlyTransactionsArray: updateMonthlyNetValues(state.allTransactions, action.payload)};
     default:
       return state;
   }
 }
-
 
 
 
@@ -86,10 +93,6 @@ function parseTransactionsFromTextFile(file){
   return transactions;
 }
 
-
-
-
-
 function getTransactionsInRange(transactions, rangeObject){
 
   var input = 0;
@@ -109,4 +112,80 @@ function getTransactionsInRange(transactions, rangeObject){
   });
 
   return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: input + output };
+}
+
+
+function updateMonthlyNetValues(transactions, rangeObject){
+
+    var input = 0;
+    var output = 0;
+    var accumulative = 0;
+    var transactionsInRange = [];
+  
+    transactions.map(transaction => {
+        if (transaction.date.isBetween(rangeObject.startDate, rangeObject.endDate, null, '[]')) {
+            transactionsInRange.push(transaction);
+        }
+    });
+
+    return calculateMonthlyNetValues(null, transactionsInRange);
+  }
+  
+
+
+function calculateMonthlyNetValues(file, transactions) {
+
+    if(!transactions){
+        transactions = parseTransactionsFromTextFile(file);
+    }
+
+    var currentMonth = transactions[0].date.format('M');
+    var prevMonth = transactions[0].date.format('M');
+    var currentYear = transactions[0].date.format('Y');
+    var prevYear = transactions[0].date.format('Y');
+    var monthValues = [];
+    var total=0;
+
+    transactions.forEach(function(element){
+        
+        currentMonth = element.date.format('M');
+        currentYear = element.date.format('Y');
+        
+        if(currentMonth == prevMonth && element!=transactions[transactions.length-1]){
+            total+=element.amount;
+        }
+        else{
+            monthValues.push({ date: monthMap[prevMonth-1] + ' ' + prevYear, SavingsPerMonth: Math.round(total*100)/100 });
+            total=element.amount;
+        }
+
+        prevMonth = currentMonth;
+        prevYear = currentYear;
+    });
+
+    return reverseAndAddDifference(monthValues);
+    // return monthValues;
+}
+
+function reverseAndAddDifference(monthValues){
+    
+    // monthValues.reverse();
+    var prev = monthValues[0].SavingsPerMonth;
+    var total = 0;
+    var i=0;
+
+    monthValues.forEach(function(element){
+        // element.DifferenceSinceLastMonth = ((prev - element.SavingsPerMonth)/((element.SavingsPerMonth + prev)/2))*100 + '%';
+        element.DifferenceSinceLastMonth = Math.round((element.SavingsPerMonth - prev)*100)/100;
+        prev = element.SavingsPerMonth;
+        if(i>1){
+            total+=element.SavingsPerMonth;
+        }
+        i++
+    });
+
+    return monthValues;
+    
+    console.log(monthValues);
+    console.log(total/(monthValues.length-2));
 }

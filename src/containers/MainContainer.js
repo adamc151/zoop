@@ -5,6 +5,9 @@ import Chart from '../components/Chart/Chart.js';
 import Accordian from '../components/Accordian/Accordian.js';
 import DateRangeSelector from '../components/DateRangeSelector/DateRangeSelector.js';
 import InOutNet from '../components/InOutNet/InOutNet.js';
+import MonthlyChart from '../components/MonthlyChart/MonthlyChart.js';
+import FileDrop from '../components/FileDrop/FileDrop.js';
+
 
 
 //We Can Use MainContainer for now as a single point to access data in the store (mapStateToProps)
@@ -15,7 +18,7 @@ class MainContainer extends React.Component {
 
   render(){
 
-    const { allTransactions, transactions, income, spending, net } = this.props;
+    const { allTransactions, transactions, monthlyTransactionsArray, income, spending, net } = this.props;
 
     let initialStartDate = null;
     let initialEndDate = null;
@@ -27,11 +30,13 @@ class MainContainer extends React.Component {
 
     return (
       <div>
+      <FileDrop />
       <FileSelector />
       <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
-      <Chart transactions={transactions} />
-      <InOutNet income={income} spending={spending} net={net} />
       <Accordian transactions={transactions} />
+      <InOutNet income={income} spending={spending} net={net} />
+      <Chart transactions={transactions} />
+      <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
       </div>);
   }
 }
@@ -46,6 +51,7 @@ function mapStateToProps(state) {
   return {
     allTransactions: state.allTransactions,
     transactions: state.transactionsInRange,
+    monthlyTransactionsArray: state.monthlyTransactionsArray,
     income: state.income,
     spending: state.spending,
     net: state.net

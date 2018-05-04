@@ -15,11 +15,11 @@ export default class Chart extends React.Component {
     return (
       <div className="chartContainer" >
       <ResponsiveContainer width="100%" height="100%" >
-      <ComposedChart className="myChart" data={transactions} margin={{top: 20, right: 20, bottom: 20, left: 20}} >
+      <ComposedChart className="myChart" data={transactions} margin={{top: 30, right: 30, bottom: 30, left: 30}} >
         <XAxis dataKey="dateString"/>
         <YAxis yAxisId="left" stroke="#413ea0" />
         <YAxis yAxisId="right" stroke="#F75D59" />
-        <Tooltip />
+        <Tooltip isAnimationActive={false}/>
         <Bar yAxisId="left" dataKey='amount' barSize={5} fill='#413ea0' />
         <Line yAxisId="right" type="monotone" dataKey="accumulative" stroke="#F75D59" dot={false} />
         <Legend />
