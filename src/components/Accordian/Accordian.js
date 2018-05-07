@@ -21,28 +21,22 @@ class Accordian extends React.Component {
   }
 
   render() {
+    return (
+      <div className="accordionContainer">
+        <div className="accordionTab">
 
-    if(this.props.transactions!=''){
-      return (
-        <div className="accordionContainer">
-          <div className="accordionTab">
-  
-              <input id="openTab" type="radio" name="tabs1" className="openTabRadio" />
-              <input id="closeTab" type="radio" name="tabs1" className="closeTabRadio" />
-  
-              <label htmlFor="openTab" className="openTabLabel">Transactions</label>
-              <label htmlFor="closeTab" className="closeTabLabel">Transactions</label>
-  
-              <div className="tab-content">
-                {this.renderTransactions()}
-              </div>
-          </div>
+            <input id="openTab" type="radio" name="tabs1" className="openTabRadio" />
+            <input id="closeTab" type="radio" name="tabs1" className="closeTabRadio" />
+
+            <label htmlFor="openTab" className="openTabLabel">Transactions</label>
+            <label htmlFor="closeTab" className="closeTabLabel">Transactions</label>
+
+            <div className="tab-content">
+              {this.renderTransactions()}
+            </div>
         </div>
-      );
-    }else{
-      return null;
-    }
-
+      </div>
+    );
   }
 
 }

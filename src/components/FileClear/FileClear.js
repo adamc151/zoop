@@ -17,18 +17,14 @@ class FileClear extends React.Component {
 
 
     render() {
-        if(this.props.transactions!=''){
-            return (
-            <div className="fileClear" >
-                <button id="clear" name="clear" onClick={this.handleFileClear} className="clearButton">CLEAR</button>
-                <label for="clear">
-                <span>Clear File</span>
-                </label>
-            </div>
-            );
-        }else{
-            return null;
-        }
+        return (
+        <div className="fileClear" >
+            <button id="clear" name="clear" onClick={this.handleFileClear} className="clearButton">CLEAR</button>
+            <label for="clear">
+            <span>Clear File</span>
+            </label>
+        </div>
+        );
     }
 }
 

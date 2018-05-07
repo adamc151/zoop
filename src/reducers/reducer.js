@@ -50,7 +50,7 @@ export default function transactions(state = initialState, action) {
             return { ...state, monthlyTransactionsArray: updateMonthlyNetValues(state.allTransactions, action.payload)};
         case CLEAR_ACTION:
             console.log('CLEAR_ACTION Action');
-            return { ...state, monthlyTransactionsArray:[], allTransactions:[], transactionsInRange:[], income:null, output:null, net:null};
+            return { ...state, monthlyTransactionsArray:[], allTransactions:[], transactionsInRange:[], income:null, spending:null, net:null};
         default:
         return state;
     }
