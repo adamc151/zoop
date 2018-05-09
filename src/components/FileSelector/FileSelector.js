@@ -9,13 +9,13 @@ class FileSelector extends React.Component {
    constructor(props) {
 		super(props);
     this.list = React.createRef();
-    this.handleFileSelect = this.handleFileSelect.bind(this);
+    this.handleFileSelect = this.handleFileSelect.bind(this); 
 	}
 
   handleFileSelect(evt) {
 
       var file = evt.target.files[0]; // FileList object
-			var textType = /text.*/;
+      var textType = /text.*/;
 
 			if (file.type.match(textType)) {
 				var reader = new FileReader();
@@ -46,7 +46,6 @@ class FileSelector extends React.Component {
     );
   }
 }
-
 
 
 function mapDispatchToProps(dispatch) {

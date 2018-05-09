@@ -7,6 +7,7 @@ import DateRangeSelector from '../components/DateRangeSelector/DateRangeSelector
 import InOutNet from '../components/InOutNet/InOutNet.js';
 import MonthlyChart from '../components/MonthlyChart/MonthlyChart.js';
 import FileDrop from '../components/FileDrop/FileDrop.js';
+import FileClear from '../components/FileClear/FileClear.js';
 
 
 
@@ -30,13 +31,16 @@ class MainContainer extends React.Component {
 
     return (
       <div>
-      <FileDrop />
-      <FileSelector />
-      <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
-      <Accordian transactions={transactions} />
-      <InOutNet income={income} spending={spending} net={net} />
-      <Chart transactions={transactions} />
-      <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
+        <FileDrop />
+        <FileSelector />
+        <FileClear />
+        <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
+        <Accordian transactions={transactions} />
+        <InOutNet income={income} spending={spending} net={net} />
+        <Chart transactions={transactions} />
+        <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
+        <br/>
+        <br/>
       </div>);
   }
 }

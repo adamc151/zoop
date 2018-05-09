@@ -1,12 +1,3 @@
-/* @font-face {
-	font-weight: normal;
-	font-style: normal;
-	font-family: 'codropsicons';
-	src: url('../../fonts/codropsicons/codropsicons.eot');
-	src: url('../../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'), url('../../fonts/codropsicons/codropsicons.woff') format('woff'), url('../../fonts/codropsicons/codropsicons.ttf') format('truetype'), url('../../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
-} */
-
-
 .dropzone {
     width: 80%;
     margin: 0 auto;
@@ -21,15 +12,17 @@
     height: 300px;
     border-style: dashed;
     border-width: 4px;
-
-    
 }
 
 .dropzoneActive{
-    background-color: #16a084c4;
+    background-color: #16a0846c;
 }
   
 .inner {
     font-size: 25px;
-    padding: 100px;
+    padding: 110px;
+}
+
+.dropzoneBox p:hover{
+    color: #16a084c4;
 }

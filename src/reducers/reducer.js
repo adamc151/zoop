@@ -1,4 +1,4 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS } from '../actions/actions';
+import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS, CLEAR_ACTION } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
 var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -28,31 +28,32 @@ let initialState = {
 //do this in parseTransactionsFromTextFile function
 
 
-
 //REDUCERRRR
 //When an action is called...the reducer checks the action type then basically does all the work depending on which action
 export default function transactions(state = initialState, action) {
 
-  console.log('transactions', state);
-  let newState;
+    let newState;
 
-  switch (action.type) {
-      case ADD_TRANSACTIONS:
-        console.log('ADD_TRANSACTIONS Action');
-        return { ...state, allTransactions: parseTransactionsFromTextFile(action.payload) };
-      case GET_TRANSACTIONS_IN_RANGE:
-        console.log('GET_TRANSACTIONS_IN_RANGE Action');
-        newState = getTransactionsInRange(state.allTransactions, action.payload);
-        return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
-      case ADD_MONTHLY_TRANSACTIONS:
-        console.log('ADD_MONTHLY_TRANSACTIONS Action');
-        return { ...state, monthlyTransactionsArray: calculateMonthlyNetValues(action.payload, null)};
-      case UPDATE_MONTHLY_TRANSACTIONS:
-        console.log('UPDATE_MONTHLY_TRANSACTIONS Action');
-        return { ...state, monthlyTransactionsArray: updateMonthlyNetValues(state.allTransactions, action.payload)};
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case ADD_TRANSACTIONS:
+            console.log('ADD_TRANSACTIONS Action');
+            return { ...state, allTransactions: parseTransactionsFromTextFile(action.payload) };
+        case GET_TRANSACTIONS_IN_RANGE:
+            console.log('GET_TRANSACTIONS_IN_RANGE Action');
+            newState = getTransactionsInRange(state.allTransactions, action.payload);
+            return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
+        case ADD_MONTHLY_TRANSACTIONS:
+            console.log('ADD_MONTHLY_TRANSACTIONS Action');
+            return { ...state, monthlyTransactionsArray: calculateMonthlyNetValues(action.payload, null)};
+        case UPDATE_MONTHLY_TRANSACTIONS:
+            console.log('UPDATE_MONTHLY_TRANSACTIONS Action');
+            return { ...state, monthlyTransactionsArray: updateMonthlyNetValues(state.allTransactions, action.payload)};
+        case CLEAR_ACTION:
+            console.log('CLEAR_ACTION Action');
+            return { ...state, monthlyTransactionsArray:[], allTransactions:[], transactionsInRange:[], income:null, spending:null, net:null};
+        default:
+        return state;
+    }
 }
 
 
@@ -62,59 +63,60 @@ export default function transactions(state = initialState, action) {
 //Move to separate folder if gets too busy
 function parseTransactionsFromTextFile(file){
 
-  var transactions = [];
-  var dateIndex = file.match(/Date:.*(?=\s)/);
-  var descriptionIndex = file.match(/Description:.*\s/);
-  var amountIndex = file.match(/Amount:.*\.[0-9]{2}/);
+    var transactions = [];
+    var dateIndex = file.match(/Date:.*(?=\s)/);
+    var descriptionIndex = file.match(/Description:.*\s/);
+    var amountIndex = file.match(/Amount:.*\.[0-9]{2}/);
 
-  while (dateIndex && descriptionIndex && amountIndex) {
-      var transactionDate = moment(dateIndex[0], 'DD/MM/YYYY');
-      transactionDate.isValid();
-      var transactionDescription = descriptionIndex[0].slice(13);
-      var transactionAmount = parseFloat(amountIndex[0].slice(8));
+    while (dateIndex && descriptionIndex && amountIndex) {
 
-      file = file.slice(amountIndex.index + 1);
+        var transactionDate = moment(dateIndex[0], 'DD/MM/YYYY');
+        transactionDate.isValid();
+        var transactionDescription = descriptionIndex[0].slice(13);
+        var transactionAmount = parseFloat(amountIndex[0].slice(8));
 
-      let newTransaction = {
-        date: transactionDate,
-        dateString: transactionDate.format('DD/MM/YYYY'),
-        description: transactionDescription,
-        amount: transactionAmount,
-        accumulative: 0
-      }
+        file = file.slice(amountIndex.index + 1);
 
-      transactions.unshift(newTransaction);
+        let newTransaction = {
+            date: transactionDate,
+            dateString: transactionDate.format('DD/MM/YYYY'),
+            description: transactionDescription,
+            amount: transactionAmount,
+            accumulative: 0
+        }
 
-      dateIndex = file.match(/Date:.*(?=\s)/);
-      descriptionIndex = file.match(/Description:.*(?=\s)/);
-      amountIndex = file.match(/Amount:.*\.[0-9]{2}/);
-  }
+        transactions.unshift(newTransaction);
+        dateIndex = file.match(/Date:.*(?=\s)/);
+        descriptionIndex = file.match(/Description:.*(?=\s)/);
+        amountIndex = file.match(/Amount:.*\.[0-9]{2}/);
+    }
 
-  return transactions;
+    return transactions;
 }
 
+// selector for updating the transactions in a range
 function getTransactionsInRange(transactions, rangeObject){
 
-  var input = 0;
-  var output = 0;
-  var accumulative = 0;
-  var transactionsInRange = [];
+    var input = 0;
+    var output = 0;
+    var accumulative = 0;
+    var transactionsInRange = [];
 
-  transactions.map(transaction => {
-      if (transaction.date.isBetween(rangeObject.startDate, rangeObject.endDate, null, '[]')) {
-          transactionsInRange.push(transaction);
-      }
-  });
+    transactions.map(transaction => {
+        if (transaction.date.isBetween(rangeObject.startDate, rangeObject.endDate, null, '[]')) {
+            transactionsInRange.push(transaction);
+        }
+    });
 
-  transactionsInRange.map(transaction => {
-    transaction.amount >= 0 ? input += transaction.amount : output += transaction.amount;
-    transaction.accumulative = accumulative+=transaction.amount;
-  });
+    transactionsInRange.map(transaction => {
+        transaction.amount >= 0 ? input += transaction.amount : output += transaction.amount;
+        transaction.accumulative = accumulative+=transaction.amount;
+    });
 
-  return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: input + output };
+    return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: input + output };
 }
 
-
+// selector for updating the monthly values in the date range
 function updateMonthlyNetValues(transactions, rangeObject){
 
     var input = 0;
@@ -129,10 +131,9 @@ function updateMonthlyNetValues(transactions, rangeObject){
     });
 
     return calculateMonthlyNetValues(null, transactionsInRange);
-  }
-  
+}
 
-
+// selector for calculating the net monthly savings
 function calculateMonthlyNetValues(file, transactions) {
 
     if(!transactions){
