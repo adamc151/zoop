@@ -6,6 +6,7 @@ import Accordian from '../components/Accordian/Accordian.js';
 import DateRangeSelector from '../components/DateRangeSelector/DateRangeSelector.js';
 import InOutNet from '../components/InOutNet/InOutNet.js';
 import MonthlyChart from '../components/MonthlyChart/MonthlyChart.js';
+import MonthlyBalanceChart from '../components/MonthlyBalanceChart/MonthlyBalanceChart.js';
 import FileDrop from '../components/FileDrop/FileDrop.js';
 import FileClear from '../components/FileClear/FileClear.js';
 
@@ -19,7 +20,7 @@ class MainContainer extends React.Component {
 
   render(){
 
-    const { allTransactions, transactions, monthlyTransactionsArray, income, spending, net } = this.props;
+    const { allTransactions, transactions, monthlyTransactionsArray, monthlyBalanceTransactionsArray, income, spending, net } = this.props;
 
     let initialStartDate = null;
     let initialEndDate = null;
@@ -39,6 +40,7 @@ class MainContainer extends React.Component {
         <InOutNet income={income} spending={spending} net={net} />
         <Chart transactions={transactions} />
         <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
+        <MonthlyBalanceChart monthlyBalanceTransactionsArray={monthlyBalanceTransactionsArray}/>
         <br/>
         <br/>
       </div>);
@@ -56,6 +58,7 @@ function mapStateToProps(state) {
     allTransactions: state.allTransactions,
     transactions: state.transactionsInRange,
     monthlyTransactionsArray: state.monthlyTransactionsArray,
+    monthlyBalanceTransactionsArray: state.monthlyBalanceTransactionsArray,
     income: state.income,
     spending: state.spending,
     net: state.net

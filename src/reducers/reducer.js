@@ -1,4 +1,4 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS, CLEAR_ACTION } from '../actions/actions';
+import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS, CLEAR_ACTION, ADD_MONTHLY_BALANCE_TRANSACTIONS } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
 var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -8,6 +8,7 @@ let initialState = {
     allTransactions: [],
     transactionsInRange: [],
     monthlyTransactionsArray: [],
+    monthlyBalanceTransactionsArray: [],
     income: null,
     spending: null,
     net: null
@@ -50,7 +51,10 @@ export default function transactions(state = initialState, action) {
             return { ...state, monthlyTransactionsArray: updateMonthlyNetValues(state.allTransactions, action.payload)};
         case CLEAR_ACTION:
             console.log('CLEAR_ACTION Action');
-            return { ...state, monthlyTransactionsArray:[], allTransactions:[], transactionsInRange:[], income:null, spending:null, net:null};
+            return { ...state, monthlyTransactionsArray:[], monthlyBalanceTransactionsArray:[], allTransactions:[], transactionsInRange:[], income:null, spending:null, net:null};
+        case ADD_MONTHLY_BALANCE_TRANSACTIONS:
+            console.log('ADD_MONTHLY_BALANCE_TRANSACTIONS Action');
+            return { ...state, monthlyBalanceTransactionsArray: calculateMonthlyBalance(action.payload, null)};
         default:
         return state;
     }
@@ -64,6 +68,7 @@ export default function transactions(state = initialState, action) {
 function parseTransactionsFromTextFile(file){
 
     var transactions = [];
+    var balanceIndex = file.match(/Balance:.*\.[0-9]{2}/);
     var dateIndex = file.match(/Date:.*(?=\s)/);
     var descriptionIndex = file.match(/Description:.*\s/);
     var amountIndex = file.match(/Amount:.*\.[0-9]{2}/);
@@ -74,6 +79,7 @@ function parseTransactionsFromTextFile(file){
         transactionDate.isValid();
         var transactionDescription = descriptionIndex[0].slice(13);
         var transactionAmount = parseFloat(amountIndex[0].slice(8));
+        var transactionBalance = parseFloat(balanceIndex[0].slice(9));
 
         file = file.slice(amountIndex.index + 1);
 
@@ -82,10 +88,12 @@ function parseTransactionsFromTextFile(file){
             dateString: transactionDate.format('DD/MM/YYYY'),
             description: transactionDescription,
             amount: transactionAmount,
-            accumulative: 0
+            accumulative: 0,
+            balance: transactionBalance
         }
 
         transactions.unshift(newTransaction);
+        balanceIndex = file.match(/Balance:.*\.[0-9]{2}/);
         dateIndex = file.match(/Date:.*(?=\s)/);
         descriptionIndex = file.match(/Description:.*(?=\s)/);
         amountIndex = file.match(/Amount:.*\.[0-9]{2}/);
@@ -189,4 +197,35 @@ function reverseAndAddDifference(monthValues){
     
     console.log(monthValues);
     console.log(total/(monthValues.length-2));
+}
+
+// monthly balance logic
+function calculateMonthlyBalance(file, transactions) {
+
+    if(!transactions){
+        transactions = parseTransactionsFromTextFile(file);
+    }
+
+    var prevMonth = 0
+    var currentYear = transactions[0].date.format('Y');
+    var prevYear = transactions[0].date.format('Y');
+    var monthValues = [];
+    var total=0;
+    var balance=0;
+    var currentMonth=0;
+    
+    transactions.forEach(function(element, index){
+        
+        currentMonth = element.date.format('M');
+        currentYear = element.date.format('Y');
+        balance = element.balance;
+        
+        if(currentMonth!=prevMonth)
+        {
+            monthValues.push({date: monthMap[currentMonth-1] + ' ' + currentYear, balance: balance});
+        }
+        prevMonth=currentMonth;
+    });
+
+    return monthValues;
 }
