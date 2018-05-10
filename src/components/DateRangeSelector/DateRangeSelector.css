@@ -5,7 +5,12 @@
     /* max-width: 70%; */
     margin: 0 auto;
     /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 15px 0 rgba(0,0,0,0.2);
+    /* box-shadow: 0 4px 15px 0 rgba(0,0,0,0.2); */
+    border-style: solid;
     line-height: 3;
     margin-top: 20px;
+}
+
+.DateRangeSelector input{
+    height: 20px;;
 }
