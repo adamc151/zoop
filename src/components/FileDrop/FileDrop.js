@@ -22,6 +22,7 @@ class FileDrop extends React.Component {
             console.log(event.target.result);
             this.props.actions.addTransactions(reader.result);
             this.props.actions.addMonthlyTransactions(reader.result);
+            this.props.actions.addMonthlyBalanceTransactions(reader.result);
         };
 
         reader.readAsText(file);

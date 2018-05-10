@@ -41,6 +41,7 @@ class DateRangeSelector extends React.Component {
   updateTransactionsDateRange(startDate, endDate){
     this.props.actions.getTransactionsInRange(startDate, endDate);
     this.props.actions.updateMonthlyTransactions(startDate, endDate);
+    this.props.actions.updateMonthlyBalance(startDate, endDate);
   }
 
 
