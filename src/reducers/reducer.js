@@ -229,9 +229,7 @@ function calculateMonthlyBalance(file, transactions) {
 
     var prevMonth = 0
     var currentYear = transactions[0].date.format('Y');
-    var prevYear = transactions[0].date.format('Y');
     var monthValues = [];
-    var total=0;
     var balance=0;
     var currentMonth=0;
     
