@@ -1,4 +1,5 @@
 import {connect} from 'react-redux';
+import {Grid, Row, Col} from 'react-bootstrap';
 import React from 'react';
 import FileSelector from '../components/FileSelector/FileSelector.js';
 import Chart from '../components/Chart/Chart.js';
@@ -32,15 +33,53 @@ class MainContainer extends React.Component {
 
     return (
       <div>
-        <FileDrop />
-        <FileSelector />
-        <FileClear />
-        <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
-        <Accordian transactions={transactions} />
-        <InOutNet income={income} spending={spending} net={net} />
-        <Chart transactions={transactions} />
-        <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
-        <MonthlyBalanceChart monthlyBalanceTransactionsArray={monthlyBalanceTransactionsArray}/>
+        <Grid fluid={true}>
+          <Row className="show-grid">
+            <Col md={12} lg={12}>
+              <FileDrop />
+            </Col>
+          </Row>
+          
+          <Row className="show-grid">
+            <Col md={6} lg={6}>
+              <FileSelector />
+            </Col>
+            <Col md={6} lg={6}>
+              <FileClear />
+            </Col>
+          </Row>
+
+          <Row className="show-grid">
+            <Col md={12} lg={5}>
+              <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
+            </Col>
+            <Col md={12} lg={7}>
+              <InOutNet income={income} spending={spending} net={net} />
+            </Col>
+          </Row>
+
+          <Row className="show-grid">
+            <Col md={12} lg={12}>
+              <Accordian transactions={transactions} />
+            </Col>
+          </Row>
+
+          <Row className="show-grid">
+            <Col md={12} lg={12}>
+              <Chart transactions={transactions} />
+            </Col>
+          </Row>
+
+          <Row className="show-grid">
+            <Col md={12} lg={8}>
+              <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
+            </Col>
+            <Col md={12} lg={4}>
+              <MonthlyBalanceChart monthlyBalanceTransactionsArray={monthlyBalanceTransactionsArray}/>
+            </Col>
+          </Row>
+        </Grid>
+        
         <br/>
         <br/>
       </div>);
