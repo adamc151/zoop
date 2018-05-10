@@ -35,6 +35,7 @@ class FileDrop extends React.Component {
           <div className="dropzone">
             <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)}>
               <img className="down_arrow" src={down_arrow} />
+              <p className="inner">Drop a bank statement here!</p>
               {/* <p className="inner">Drop a bank statement here! Or click to select...</p> */}
             </Dropzone>
           </div>
