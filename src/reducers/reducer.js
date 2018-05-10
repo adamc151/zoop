@@ -1,4 +1,5 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS, CLEAR_ACTION, ADD_MONTHLY_BALANCE_TRANSACTIONS } from '../actions/actions';
+import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS,
+    CLEAR_ACTION, ADD_MONTHLY_BALANCE_TRANSACTIONS, UPDATE_MONTHLY_BALANCE_TRANSACTIONS } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
 var monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -55,6 +56,9 @@ export default function transactions(state = initialState, action) {
         case ADD_MONTHLY_BALANCE_TRANSACTIONS:
             console.log('ADD_MONTHLY_BALANCE_TRANSACTIONS Action');
             return { ...state, monthlyBalanceTransactionsArray: calculateMonthlyBalance(action.payload, null)};
+        case UPDATE_MONTHLY_BALANCE_TRANSACTIONS:
+            console.log('UPDATE_MONTHLY_BALANCE_TRANSACTIONS Action');
+            return { ...state, monthlyBalanceTransactionsArray: updateMonthlyBalance(state.allTransactions, action.payload)};
         default:
         return state;
     }
@@ -139,6 +143,23 @@ function updateMonthlyNetValues(transactions, rangeObject){
     });
 
     return calculateMonthlyNetValues(null, transactionsInRange);
+}
+
+// selector for updating the monthly balance values in the date range
+function updateMonthlyBalance(transactions, rangeObject){
+
+    var input = 0;
+    var output = 0;
+    var accumulative = 0;
+    var transactionsInRange = [];
+  
+    transactions.map(transaction => {
+        if (transaction.date.isBetween(rangeObject.startDate, rangeObject.endDate, null, '[]')) {
+            transactionsInRange.push(transaction);
+        }
+    });
+
+    return calculateMonthlyBalance(null, transactionsInRange);
 }
 
 // selector for calculating the net monthly savings
