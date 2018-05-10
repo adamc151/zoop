@@ -16,7 +16,7 @@ export default class MonthlyChart extends React.Component {
               <Tooltip isAnimationActive={false}/>
               <Legend />
               <Bar dataKey="SavingsPerMonth" fill="#ff751a" />
-              <Area type="monotone" dataKey="DifferenceSinceLastMonth" fill="#8884d8" stroke="#8884d8" />
+              <Area type="monotone" dataKey="DifferenceSinceLastMonth" fill="#16a085" stroke="#ff751a" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>

@@ -14,8 +14,8 @@ export default class MonthlyChart extends React.Component {
               <XAxis dataKey="date" />
               <YAxis unit={" £"}/>
               <Tooltip isAnimationActive={false}/>
-              <Bar dataKey="balance" fill="#ff751a" barSize={4}/>
-              <Area type="monotone" dataKey="balance" fill="#8884d8" stroke="#8884d8" />
+              {/* <Bar dataKey="balance" fill="#ff751a" barSize={4}/> */}
+              <Area type="monotone" dataKey="balance" fill="#16a085" stroke="#ff751a" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
