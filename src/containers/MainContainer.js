@@ -50,13 +50,11 @@ class MainContainer extends React.Component {
           </Row>
 
           <Row className="show-grid">
-            <Col md={12} lg={5}>
+            <Col md={12} lg={12}>
               <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
             </Col>
-            <Col md={12} lg={7}>
-              <InOutNet income={income} spending={spending} net={net} />
-            </Col>
           </Row>
+
 
           <Row className="show-grid">
             <Col md={12} lg={12}>
@@ -78,6 +76,13 @@ class MainContainer extends React.Component {
               <MonthlyBalanceChart monthlyBalanceTransactionsArray={monthlyBalanceTransactionsArray}/>
             </Col>
           </Row>
+
+          <Row className="show-grid">
+            <Col md={12} lg={12}>
+              <InOutNet income={income} spending={spending} net={net} />
+            </Col>
+          </Row>
+
         </Grid>
         
         <br/>
