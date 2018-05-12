@@ -1,7 +1,7 @@
 .fileClear {
     /* width: 90%; */
     margin: 0 auto;
-    margin-top: 0px;
+    margin-top: 80px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

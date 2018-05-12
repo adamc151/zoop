@@ -37,17 +37,20 @@ export default class MainContainer extends React.Component {
     return (
       <Router>
         <div>
-          <header className="App-header">
-            <ul>
-              <Link to="/graphs"><button>graphs</button></Link>
-              <Link to="/"><button>back</button></Link>
-            </ul>
-            {/* <img src={logo} className="App-logo" alt="logo" /> */}
-            {/* <h1 className="App-title">Welcome to Zoop</h1> */}
-          </header>
+            {/* <ul>
+            </ul> */}
+
+
+          <div className="navbar">
+            <Link to="/"><a>Upload File</a></Link>
+            <Link to="/Dashboard"><a>Dashboard</a></Link>
+          </div>
           
           <Route exact path="/" component={FilePage} />
-          <Route path="/graphs" component={GraphPage} />
+          <Route path="/Dashboard" component={GraphPage} />
+
+
+          
 
 
 

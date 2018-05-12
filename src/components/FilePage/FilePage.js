@@ -5,6 +5,7 @@ import FileDrop from '../FileDrop/FileDrop.js';
 import FileSelector from '../FileSelector/FileSelector.js';
 import {Grid, Row, Col} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './FilePage.css';
 
 export default class FilePage extends React.Component {
 
@@ -28,6 +29,11 @@ export default class FilePage extends React.Component {
             <FileSelector />
           </Col>
         </Row>
+
+        <div class="footer">
+            <p>We NEVER store your financial data!  <i class="em em---1"></i></p>
+            
+        </div>
 
         
 

@@ -10,6 +10,7 @@ import MonthlyChart from '../MonthlyChart/MonthlyChart.js';
 import MonthlyBalanceChart from '../MonthlyBalanceChart/MonthlyBalanceChart.js';
 import FileClear from '../FileClear/FileClear.js';
 import { Link } from 'react-router-dom';
+import './GraphPage.css';
 
 class GraphPage extends React.Component {
 
@@ -27,13 +28,13 @@ class GraphPage extends React.Component {
     }
 
     return (
-    <div>
+    <div className="graphs">
       <Grid fluid={true}>
 
         <Row className="show-grid">
           <Col md={12} lg={12}>
           {/* <Link to="/"><FileClear /></Link> */}
-          <FileClear />
+          {/* <FileClear /> */}
           </Col>
         </Row>
 

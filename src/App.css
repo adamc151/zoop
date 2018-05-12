@@ -11,32 +11,29 @@
   overflow-x: hidden;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 80px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.container-full {
-  margin: 0 auto;
+/* The navigation bar */
+.navbar {
+  background-color: rgba(22, 22, 22, 0.918);
+  border-radius: 0px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
   width: 100%;
+  z-index: 1;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+  background: #ddd;
+  color: black;
 }
