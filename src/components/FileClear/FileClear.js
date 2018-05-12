@@ -20,7 +20,7 @@ class FileClear extends React.Component {
         return (
         <div className="fileClear" >
             <button id="clear" name="clear" onClick={this.handleFileClear} className="clearButton">CLEAR</button>
-            <label for="clear">
+            <label for="clear" className="fileLabel">
             <span>Clear File</span>
             </label>
         </div>

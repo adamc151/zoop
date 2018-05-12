@@ -2,14 +2,14 @@
     width: 80%;
     margin: 0 auto;
     margin-top: 20px;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-around; */
 }
 
 .dropzoneBox{
-    width: 60%;
-    height: 300px;
+    /* width: 60%; */
+    height: 200px;
     border-style: dashed;
     border-width: 4px;
 }
@@ -19,10 +19,16 @@
 }
   
 .inner {
-    font-size: 25px;
-    padding: 110px;
+    font-size: 18px;
+    padding: 10px;
 }
 
 .dropzoneBox p:hover{
     color: #16a084c4;
+}
+
+.down_arrow{
+    width: 100px;
+    margin-top: 35px;
+    opacity: 0.7;
 }

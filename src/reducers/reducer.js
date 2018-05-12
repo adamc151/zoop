@@ -125,7 +125,13 @@ function getTransactionsInRange(transactions, rangeObject){
         transaction.accumulative = accumulative+=transaction.amount;
     });
 
-    return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: input + output };
+    input = Math.round(input * 100) / 100;
+    output = Math.round(output * 100) / 100;
+    var total = input + output;
+    total = Math.round(total * 100) / 100;
+    output = output*-1;
+
+    return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: total };
 }
 
 // selector for updating the monthly values in the date range

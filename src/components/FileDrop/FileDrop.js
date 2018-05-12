@@ -4,6 +4,7 @@ import * as actions from '../../actions/actions';
 import React from 'react';
 import Dropzone from 'react-dropzone'
 import './FileDrop.css';
+import down_arrow from './down-arrow.png';
 
 class FileDrop extends React.Component {
     constructor() {
@@ -33,7 +34,9 @@ class FileDrop extends React.Component {
         <section>
           <div className="dropzone">
             <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)}>
-              <p className="inner">Drop a bank statement here! Or click to select...</p>
+              <img className="down_arrow" src={down_arrow} />
+              <p className="inner">Drop a bank statement here!</p>
+              {/* <p className="inner">Drop a bank statement here! Or click to select...</p> */}
             </Dropzone>
           </div>
         </section>

@@ -2,6 +2,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import {connect} from 'react-redux';
+import {Grid, Row, Col} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/actions';
 import './DateRangeSelector.css';
@@ -68,22 +69,42 @@ class DateRangeSelector extends React.Component {
     
     return (
       <div className="DateRangeSelector">
-      From: <DatePicker
-        selected={ this.state.startDate }
-        onChange={this.changeStartDate}
-        minDate={ this.state.minDate }
-        maxDate={ this.state.endDate }
-        dateFormat="DD/MM/YYYY"
-        className="startDatePicker"
-      />
-      To: <DatePicker
-        selected={ this.state.endDate }
-        onChange={this.changeEndDate}
-        minDate={ this.state.startDate }
-        maxDate={ this.state.maxDate }
-        dateFormat="DD/MM/YYYY"
-        className="endDatePicker"
-      />
+
+      <Grid fluid={true}>
+          <Row className="show-grid">
+            <Col xs={6} sm={6} md={6}>
+              <label for="startDate" className="dateLabel">From</label>
+            </Col>
+            <Col xs={6} sm={6} md={6}>
+              <label for="endDate" className="dateLabel">To</label>
+            </Col>
+          </Row>
+          <Row className="show-grid">
+            <Col xs={6} sm={6} md={6}>
+              <DatePicker
+                selected={ this.state.startDate }
+                onChange={this.changeStartDate}
+                minDate={ this.state.minDate }
+                maxDate={ this.state.endDate }
+                dateFormat="DD/MM/YYYY"
+                className="react-datepicker"
+                name="startDate"
+              />
+            </Col>
+            <Col xs={6} sm={6} md={6}>
+              <DatePicker
+                selected={ this.state.endDate }
+                onChange={this.changeEndDate}
+                minDate={ this.state.startDate }
+                maxDate={ this.state.maxDate }
+                dateFormat="DD/MM/YYYY"
+                className="react-datepicker"
+                name="endDate"
+              />
+            </Col>
+          </Row>
+      </Grid>
+
     </div>);
   }
 }
