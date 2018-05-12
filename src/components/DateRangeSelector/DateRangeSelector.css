@@ -20,10 +20,15 @@
     width: 160px;
     font-size: 18px;
     border-radius: 20px;
-    border-color: #16a08463;
+    /* border: none; */
+    border-color: #5251512a;
     border-width: 1px;
     padding: 10px;
     text-align: center;
+}
+
+.DateRangeSelector input:focus{
+  outline: none;
 }
 
 .dateLabel{

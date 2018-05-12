@@ -129,6 +129,7 @@ function getTransactionsInRange(transactions, rangeObject){
     output = Math.round(output * 100) / 100;
     var total = input + output;
     total = Math.round(total * 100) / 100;
+    output = output*-1;
 
     return { transactionsInRange: transactionsInRange, inRangeIncome: input, inRangeSpending: output, inRangeNet: total };
 }
