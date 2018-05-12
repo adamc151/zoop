@@ -5,6 +5,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone'
 import './FileDrop.css';
 import down_arrow from './down-arrow.png';
+import tick_icon from './checked.png';
 
 class FileDrop extends React.Component {
     constructor() {
@@ -34,8 +35,8 @@ class FileDrop extends React.Component {
         <section>
           <div className="dropzone">
             <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)}>
-              <img className="down_arrow" src={down_arrow} />
-              <p className="inner">Drop a bank statement here!</p>
+              <img className="down_arrow" src={this.state.files.length == 0 ? down_arrow : tick_icon} />
+              <p className="inner">{this.state.files.length == 0 ? "Drop a bank statement here!" : "Successful"}</p>
               {/* <p className="inner">Drop a bank statement here! Or click to select...</p> */}
             </Dropzone>
           </div>
