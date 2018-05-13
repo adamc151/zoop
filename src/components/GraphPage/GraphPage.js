@@ -33,13 +33,6 @@ class GraphPage extends React.Component {
 
         <Row className="show-grid">
           <Col md={12} lg={12}>
-          {/* <Link to="/"><FileClear /></Link> */}
-          {/* <FileClear /> */}
-          </Col>
-        </Row>
-
-        <Row className="show-grid">
-          <Col md={12} lg={12}>
             <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
           </Col>
         </Row>
@@ -68,6 +61,12 @@ class GraphPage extends React.Component {
         <Row className="show-grid">
           <Col md={12} lg={12}>
             <InOutNet income={income} spending={spending} net={net} />
+          </Col>
+        </Row>
+
+        <Row className="show-grid">
+          <Col md={12} lg={12}>
+            <FileClear />
           </Col>
         </Row>
 

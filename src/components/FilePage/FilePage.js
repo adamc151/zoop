@@ -32,7 +32,6 @@ export default class FilePage extends React.Component {
 
         <div class="footer">
             <p>We NEVER store your financial data!  <i class="em em---1"></i></p>
-            
         </div>
 
         
