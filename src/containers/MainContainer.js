@@ -37,79 +37,12 @@ export default class MainContainer extends React.Component {
     return (
       <Router>
         <div>
-            {/* <ul>
-            </ul> */}
-
-
           <div className="navbar">
             <Link to="/"><a>Upload File</a></Link>
             <Link to="/Dashboard"><a>Dashboard</a></Link>
           </div>
-          
           <Route exact path="/" component={FilePage} />
           <Route path="/Dashboard" component={GraphPage} />
-
-
-          
-
-
-
-
-
-
-          <Grid fluid={true}>
-
-
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <FileDrop />
-              </Col>
-            </Row> */}
-            
-            {/* <Row className="show-grid">
-              <Col md={6} lg={6}>
-                <FileSelector />
-              </Col>
-              <Col md={6} lg={6}>
-                <FileClear />
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <Accordian transactions={transactions} />
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <Chart transactions={transactions} />
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={8}>
-                <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
-              </Col>
-              <Col md={12} lg={4}>
-                <MonthlyBalanceChart monthlyBalanceTransactionsArray={monthlyBalanceTransactionsArray}/>
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <InOutNet income={income} spending={spending} net={net} />
-              </Col>
-            </Row> */}
-
-          </Grid>
           <br/>
           <br/>
         </div>

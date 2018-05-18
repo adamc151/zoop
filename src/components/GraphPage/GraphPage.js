@@ -38,14 +38,11 @@ class GraphPage extends React.Component {
         </Row>
 
         <Row className="show-grid">
-          <Col md={12} lg={12}>
-            <Accordian transactions={transactions} />
-          </Col>
-        </Row>
-
-        <Row className="show-grid">
-          <Col md={12} lg={12}>
+          <Col sm={12} md={12} lg={8}>
             <Chart transactions={transactions} />
+          </Col>
+          <Col sm={12} md={12} lg={4}>
+            <Accordian transactions={transactions} />
           </Col>
         </Row>
 

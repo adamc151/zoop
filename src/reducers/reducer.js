@@ -64,8 +64,6 @@ export default function transactions(state = initialState, action) {
     }
 }
 
-
-
 //SELECTORSSSS
 //Just funcctions to manipulate the data before adding to the store (THESE DO ALL THE WORK basically)
 //Move to separate folder if gets too busy
@@ -81,7 +79,7 @@ function parseTransactionsFromTextFile(file){
 
         var transactionDate = moment(dateIndex[0], 'DD/MM/YYYY');
         transactionDate.isValid();
-        var transactionDescription = descriptionIndex[0].slice(13);
+        var transactionDescription = descriptionIndex[0].slice(13).split('(')[0].split(',')[0];
         var transactionAmount = parseFloat(amountIndex[0].slice(8));
         var transactionBalance = parseFloat(balanceIndex[0].slice(9));
 
