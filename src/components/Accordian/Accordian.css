@@ -116,3 +116,7 @@ label::after {
   width: 15px;
   /* margin-top: 15px; */
 }
+
+.close_icon:hover{
+  background-color: #16a085;
+}
