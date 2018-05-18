@@ -1,7 +1,7 @@
 .accordionContainer {
   width: 100%;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .accordionTab {
@@ -32,7 +32,7 @@ label {
 }
 
 .tab-content {
-  max-height: 300px;
+  max-height: 220px;
   overflow: scroll;
   -webkit-transition: max-height .35s;
   -o-transition: max-height .35s;

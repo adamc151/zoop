@@ -41,10 +41,16 @@ class GraphPage extends React.Component {
           <Col sm={12} md={12} lg={8}>
             <Chart transactions={transactions} />
           </Col>
-          <Col sm={12} md={12} lg={4}>
-            <Accordian transactions={transactions} />
-          </Col>
+          <Row className="show-grid">
+            <Col sm={12} md={12} lg={4}>
+              <Accordian transactions={transactions} />
+            </Col>
+              <Col md={12} lg={4}>
+              <InOutNet income={income} spending={spending} net={net} />
+            </Col>
+          </Row>
         </Row>
+
 
         <Row className="show-grid">
           <Col md={12} lg={8}>
@@ -55,11 +61,11 @@ class GraphPage extends React.Component {
           </Col>
         </Row>
 
-        <Row className="show-grid">
+        {/* <Row className="show-grid">
           <Col md={12} lg={12}>
             <InOutNet income={income} spending={spending} net={net} />
           </Col>
-        </Row>
+        </Row> */}
 
         <Row className="show-grid">
           <Col md={12} lg={12}>
