@@ -13,8 +13,6 @@ class Accordian extends React.Component {
   renderTransactions(){
     if (!this.props.transactions) return null;
 
-    console.log('proppy: ' + this.props.transactions);
-
     return this.props.transactions.map((transaction, i) => {
       return <AccordianItem key={i} transaction={transaction} />
     });

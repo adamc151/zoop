@@ -13,6 +13,7 @@ import FileDrop from '../components/FileDrop/FileDrop.js';
 import FileClear from '../components/FileClear/FileClear.js';
 import FilePage from '../components/FilePage/FilePage.js';
 import GraphPage from '../components/GraphPage/GraphPage.js';
+import HowMuchPage from '../components/HowMuchPage/HowMuchPage.js'
 import { Link } from 'react-router-dom';
 
 
@@ -44,13 +45,16 @@ export default class MainContainer extends React.Component {
           <div className="navbar">
             <Link to="/"><a>Upload File</a></Link>
             <Link to="/Dashboard"><a>Dashboard</a></Link>
+            <Link to="/HowMuch"><a>How Much?</a></Link>
           </div>
-          
+
           <Route exact path="/" component={FilePage} />
           <Route path="/Dashboard" component={GraphPage} />
 
+          <Route path="/HowMuch" component={HowMuchPage} />
 
-          
+
+
 
 
 
@@ -66,7 +70,7 @@ export default class MainContainer extends React.Component {
                 <FileDrop />
               </Col>
             </Row> */}
-            
+
             {/* <Row className="show-grid">
               <Col md={6} lg={6}>
                 <FileSelector />

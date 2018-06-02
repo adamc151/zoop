@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function AccordianItem(props){
 
-    const { dateString, description, amount } = props.transaction;
+    const { dateString, description, location, amount } = props.transaction;
 
     return (
       <div>
       <div>{dateString}</div>
-      <div>{description}</div>
+      <div>{location}</div>
       <div>{amount}</div>
       </div>
     );
