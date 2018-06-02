@@ -11,7 +11,7 @@ export default function AccordianItem(props){
       <Grid fluid={true}>
         <Row className="show-grid">
           <Col md={2} lg={2}>
-            <div>£{amount}</div>
+            <div className={ amount>0 ? 'greenClass' : 'redClass' }>£{amount}</div>
           </Col>
           <Col md={7} lg={7}>
             <div>{description}</div>

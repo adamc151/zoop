@@ -1,7 +1,7 @@
 .accordionContainer {
   width: 100%;
   margin-top: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .accordionTab {
@@ -119,4 +119,12 @@ label::after {
 
 .close_icon:hover{
   background-color: #16a085;
+}
+
+.redClass{
+  color: rgba(255, 30, 0, 0.801);
+}
+
+.greenClass{
+  color: #16a085;
 }
