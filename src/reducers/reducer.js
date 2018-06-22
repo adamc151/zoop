@@ -269,18 +269,33 @@ function calculateMonthlyBalance(file, transactions) {
 }
 
 
-function removeTransaction(transactions, index){
+function removeTransaction(transactions, myIndex){
 
   var input = 0;
   var output = 0;
   var accumulative = 0;
-  var transactionsInRange = [];
+  var newTransactions = [];
 
-  console.log("before: ", transactions[index]);
-  transactions.splice(index, 1);
-  console.log("after: ", transactions[index]);
+  // console.log("before: ", transactions[index]);
+  // console.log("before size: ", transactions.length);
+  // transactions.splice(index, 1);
+  // console.log("after: ", transactions[index]);
+  // console.log("after size: ", transactions.length);
 
-  transactions.map(transaction => {
+  //newTransactions = transactions.filter (item, index => index !== myIndex) // new array without 'b'
+
+  transactions.map((transaction, index) => {
+
+    if(index != myIndex){
+      newTransactions.push(transaction);
+    } else {
+      console.log("remove: ", transaction);
+    }
+  })
+
+
+
+  newTransactions.map(transaction => {
       transaction.amount >= 0 ? input += transaction.amount : output += transaction.amount;
       transaction.accumulative = accumulative+=transaction.amount;
   });
@@ -291,5 +306,5 @@ function removeTransaction(transactions, index){
   total = Math.round(total * 100) / 100;
   output = output*-1;
 
-  return { transactionsInRange: transactions, inRangeIncome: input, inRangeSpending: output, inRangeNet: total };
+  return { transactionsInRange: newTransactions, inRangeIncome: input, inRangeSpending: output, inRangeNet: total };
 }
