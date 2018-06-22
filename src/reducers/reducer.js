@@ -46,7 +46,7 @@ export default function transactions(state = initialState, action) {
             return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
         case REMOVE_TRANSACTION:
             console.log("Remove transaction index ", action.payload);
-            newState = removeTransaction(state.allTransactions, action.payload);
+            newState = removeTransaction(state.transactionsInRange, action.payload);
             return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
         case ADD_MONTHLY_TRANSACTIONS:
             console.log('ADD_MONTHLY_TRANSACTIONS Action');
@@ -283,6 +283,8 @@ function removeTransaction(transactions, myIndex){
   // console.log("after size: ", transactions.length);
 
   //newTransactions = transactions.filter (item, index => index !== myIndex) // new array without 'b'
+  console.log("transactions size: ", transactions.length);
+
 
   transactions.map((transaction, index) => {
 
@@ -293,7 +295,7 @@ function removeTransaction(transactions, myIndex){
     }
   })
 
-
+  console.log("newTransactions size: ", newTransactions.length);
 
   newTransactions.map(transaction => {
       transaction.amount >= 0 ? input += transaction.amount : output += transaction.amount;
