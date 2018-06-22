@@ -99,3 +99,15 @@ label::after {
   -o-transition: all .35s;
   transition: all .35s;
 }
+
+
+.accordianItemWrapper {
+  display: grid;
+  grid-template-columns: 20% auto 20% 5%;
+  align-items: start;
+  padding: 4px;
+}
+
+.itemLocation, .itemAmount {
+    text-align: start;
+}

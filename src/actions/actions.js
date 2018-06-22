@@ -1,5 +1,6 @@
 //ACTION TYPES - used to label each action
 export const ADD_TRANSACTIONS = 'ADD_TRANSACTIONS';
+export const REMOVE_TRANSACTION = 'REMOVE_TRANSACTION';
 export const GET_TRANSACTIONS_IN_RANGE = 'GET_TRANSACTIONS_IN_RANGE';
 export const ADD_MONTHLY_TRANSACTIONS = 'ADD_MONTHLY_TRANSACTIONS';
 export const UPDATE_MONTHLY_TRANSACTIONS = 'UPDATE_MONTHLY_TRANSACTIONS';
@@ -12,6 +13,10 @@ export const UPDATE_MONTHLY_BALANCE_TRANSACTIONS = 'UPDATE_MONTHLY_BALANCE_TRANS
 //Then the reducers can be like ...if(action.type == ADD_TRANSACTIONS){ do this }...else if(action.type == GET_TRANSACTIONS_IN_RANGE){ do this instead }...etc
 export function addTransactions(file) {
   return {type: ADD_TRANSACTIONS, payload: file};
+}
+
+export function removeTransaction(index) {
+  return {type: REMOVE_TRANSACTION, payload: index};
 }
 
 export function getTransactionsInRange(startDate, endDate) {

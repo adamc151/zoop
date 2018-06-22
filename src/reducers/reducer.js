@@ -1,4 +1,4 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS,
+import { ADD_TRANSACTIONS, REMOVE_TRANSACTION, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS,
     CLEAR_ACTION, ADD_MONTHLY_BALANCE_TRANSACTIONS, UPDATE_MONTHLY_BALANCE_TRANSACTIONS } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
@@ -43,6 +43,10 @@ export default function transactions(state = initialState, action) {
         case GET_TRANSACTIONS_IN_RANGE:
             console.log('GET_TRANSACTIONS_IN_RANGE Action');
             newState = getTransactionsInRange(state.allTransactions, action.payload);
+            return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
+        case REMOVE_TRANSACTION:
+            console.log("Remove transaction index ", action.payload);
+            newState = removeTransaction(state.allTransactions, action.payload);
             return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
         case ADD_MONTHLY_TRANSACTIONS:
             console.log('ADD_MONTHLY_TRANSACTIONS Action');
@@ -262,4 +266,30 @@ function calculateMonthlyBalance(file, transactions) {
     });
 
     return monthValues;
+}
+
+
+function removeTransaction(transactions, index){
+
+  var input = 0;
+  var output = 0;
+  var accumulative = 0;
+  var transactionsInRange = [];
+
+  console.log("before: ", transactions[index]);
+  transactions.splice(index, 1);
+  console.log("after: ", transactions[index]);
+
+  transactions.map(transaction => {
+      transaction.amount >= 0 ? input += transaction.amount : output += transaction.amount;
+      transaction.accumulative = accumulative+=transaction.amount;
+  });
+
+  input = Math.round(input * 100) / 100;
+  output = Math.round(output * 100) / 100;
+  var total = input + output;
+  total = Math.round(total * 100) / 100;
+  output = output*-1;
+
+  return { transactionsInRange: transactions, inRangeIncome: input, inRangeSpending: output, inRangeNet: total };
 }
