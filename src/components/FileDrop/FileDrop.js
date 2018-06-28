@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone'
 import './FileDrop.css';
 import down_arrow from './down-arrow.png';
 import tick_icon from './checked.png';
+import download from './downloadIcon.png';
 import { Redirect } from 'react-router-dom';
 import FileSelector from '../FileSelector/FileSelector.js';
 
@@ -41,16 +42,16 @@ class FileDrop extends React.Component {
       return (
         <section>
           <div className="dropzone">
-            <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)}>
-              <img className="down_arrow" src={this.state.files.length == 0 ? down_arrow : tick_icon} />
+            <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)} disableClick={true}>
+              <img className="down_arrow" src={this.state.files.length == 0 ? download : tick_icon} />
 
-              <div>
-              <p className="inner">{this.state.files.length == 0 ? "Drop a bank statement here!" : "Successful"}</p>
+              <div className="fileSelectWrapper">
+              <p className="inner">{this.state.files.length == 0 ? "Drop a bank statement here or..." : "Successful"}</p>
               {
-                this.state.files.length != 0 ? this.redirectPage() : null
+                // this.state.files.length != 0 ? this.redirectPage() : null
               }
               {/* <p className="inner">Drop a bank statement here! Or click to select...</p> */}
-              <FileSelector disableFunctionality={true} />
+              <FileSelector disableFunctionality={false} />
               </div>
             </Dropzone>
           </div>

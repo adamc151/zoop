@@ -8,7 +8,8 @@
     /* width: 60%; */
     height: 50%;
     border-style: dashed;
-    border-width: 4px;
+    border-width: 2px;
+    border-color: lightgrey;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -24,16 +25,14 @@
 }
 
 .dropzoneBox:hover{
-    color: #16a084c4;
-    cursor: pointer;
 }
 
 .down_arrow{
   margin-top: 30px;
   margin-bottom: 30px;
-    height: 120px;
-    width: 120px;
-    opacity: 0.7;
+    height: 90px;
+    width: 90px;
+    opacity: 0.5;
 }
 
 .santander_logo {
@@ -42,4 +41,9 @@
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   padding: 3px 3px 3px 3px;
   border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.fileSelectWrapper{
+   max-width: 400px;
+   width: 90%;
 }

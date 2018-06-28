@@ -25,3 +25,8 @@
 .banksText{
   font-size: 25px;
 }
+
+.selecterWrapper{
+  width: 90%;
+  max-width: 400px;
+}
