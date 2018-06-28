@@ -16,7 +16,7 @@
   background-color: rgba(22, 22, 22, 0.836);
   border-radius: 0px;
   overflow: hidden;
-  position: fixed;
+  position: relative;
   top: 0;
   width: 100%;
   z-index: 1;

@@ -53,14 +53,6 @@ export default class MainContainer extends React.Component {
 
           <Route path="/HowMuch" component={HowMuchPage} />
 
-
-
-
-
-
-
-
-
           <Grid fluid={true}>
 
 

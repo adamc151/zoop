@@ -47,6 +47,11 @@ label {
 .closeTabLabel {
   display: none;
   content: "+";
+  margin-bottom: 0px;
+}
+
+.openTabLabel {
+  margin-bottom: 0px;
 }
 
 .openTabLabel::after {
@@ -108,6 +113,14 @@ label::after {
   padding: 4px;
 }
 
+.accordianItemWrapper:hover {
+    background-color: lightgrey;
+}
+
 .itemLocation, .itemAmount {
     text-align: start;
+}
+
+.itemDate, .itemLocation, .itemAmount {
+  line-height: 2;
 }
