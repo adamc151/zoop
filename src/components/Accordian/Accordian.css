@@ -124,3 +124,39 @@ label::after {
 .itemDate, .itemLocation, .itemAmount {
   line-height: 2;
 }
+
+
+.close-button {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    line-height: 3;
+    display: inline-block;
+}
+
+.close-button::before, .close-button::after{
+  transform: rotate(-45deg);
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12px;
+  display: block;
+  height: 2px;
+  width: 25px;
+  background-color: gray;
+}
+
+.close-button::after{
+  transform: rotate(-135deg);
+}
+
+.close-button:hover::before, .close-button:hover::after {
+  transition: all 0.25s ease-out;
+  transform: rotate(0deg);
+}
+
+.close-button:hover{
+  cursor: pointer;
+}
