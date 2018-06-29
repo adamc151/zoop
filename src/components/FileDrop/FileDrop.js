@@ -44,10 +44,6 @@ class FileDrop extends React.Component {
         reader.readAsText(file);
     }
 
-    redirectPage(){
-      return <Redirect to="/Dashboard" />
-    }
-
 
 
     render() {
