@@ -24,8 +24,8 @@
   background-color: #16a084de;
   display: inline-block;
   cursor: pointer; /* "hand" cursor */
-  width: 300px;
-  margin-top: 20px;
+  width: 90%;
+  margin-bottom: 30px;
 }
 
 .inputfile:focus + .fileLabel,

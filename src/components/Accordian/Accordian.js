@@ -10,46 +10,53 @@ class Accordian extends React.Component {
 
    constructor(props) {
 		super(props);
+
+    this.myCallback = this.myCallback.bind(this);
 	}
+
+  myCallback(index){
+    console.log(index);
+    this.props.actions.removeTransaction(index);
+  }
 
   renderTransactions(){
     if (!this.props.transactions) return null;
 
-    console.log('proppy: ' + this.props.transactions);
-
     return this.props.transactions.map((transaction, i) => {
-      return <AccordianItem key={i} transaction={transaction} onRemove={this.handleRemove.bind(this,i)} />
+      return <AccordianItem key={i} index={i} transaction={transaction} callback={this.myCallback} />
     });
   }
 
-  handleRemove(index){
-    alert('remove' + index);
-  }
+  componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps', nextProps);
+        // this.setState(nextProps);
+    }
+
+
 
 
   render() {
-    if(this.props.transactions.length!=0){
-      return (
-        <div className="accordionContainer">
-          <div className="accordionTab">
+    console.log("re renderrr");
 
-              <input id="openTab" type="radio" name="tabs1" className="openTabRadio" />
-              <input id="closeTab" type="radio" name="tabs1" className="closeTabRadio" />
 
-              <label htmlFor="openTab" className="openTabLabel">Transactions</label>
-              <label htmlFor="closeTab" className="closeTabLabel">Transactions</label>
+    return (
+      <div className="accordionContainer">
+        <div className="accordionTab">
 
-              <div className="tab-content">
-                {this.renderTransactions()}
-              </div>
-          </div>
+            <input id="openTab" type="radio" name="tabs1" className="openTabRadio" />
+            <input id="closeTab" type="radio" name="tabs1" className="closeTabRadio" />
+
+            <label htmlFor="openTab" className="openTabLabel">Transactions</label>
+            <label htmlFor="closeTab" className="closeTabLabel">Transactions</label>
+
+            <div className="tab-content">
+              {this.renderTransactions()}
+            </div>
+
         </div>
-      );
-    }else{
-      return null;
-    }
+      </div>
+    );
   }
-
 }
 
 function mapStateToProps(state) {
@@ -58,7 +65,14 @@ function mapStateToProps(state) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Accordian);

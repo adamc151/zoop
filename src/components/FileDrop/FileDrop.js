@@ -6,47 +6,73 @@ import Dropzone from 'react-dropzone'
 import './FileDrop.css';
 import down_arrow from './down-arrow.png';
 import tick_icon from './checked.png';
+import download from './downloadIcon.png';
 import { Redirect } from 'react-router-dom';
+import FileSelector from '../FileSelector/FileSelector.js';
+import LoaderSpinner from '../LoaderSpinner/LoaderSpinner.js';
+
 
 class FileDrop extends React.Component {
     constructor() {
       super()
       this.state = { files: [] }
     }
-  
+
     onDrop(files) {
         this.setState({
-            files
+            files,
+            onRead: true
         });
 
         var file = files[0]
         const reader = new FileReader();
         reader.onload = (event) => {
-            console.log(event.target.result);
             this.props.actions.addTransactions(reader.result);
             this.props.actions.addMonthlyTransactions(reader.result);
             this.props.actions.addMonthlyBalanceTransactions(reader.result);
-            
+            console.log(this.props.history);
+
+            setTimeout(() => {
+              this.setState({
+                  toDashboard: true
+              });
+            }, 1000);
+
+
         };
 
         reader.readAsText(file);
     }
 
-    redirectPage(){
-      return <Redirect to="/Dashboard" />
-    }
-  
+
+
     render() {
+
+      if(this.state.toDashboard){
+        return <Redirect to="/Dashboard" />
+      }
+
+
       return (
         <section>
           <div className="dropzone">
-            <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)}>
-              <img className="down_arrow" src={this.state.files.length == 0 ? down_arrow : tick_icon} />
-              <p className="inner">{this.state.files.length == 0 ? "Drop a bank statement here!" : "Successful"}</p>
+            <Dropzone className="dropzoneBox" activeClassName="dropzoneActive" onDrop={this.onDrop.bind(this)} disableClick={true}>
+
+            { //Check if message failed
+              (this.state.files.length == 0)
+            ? <img className="down_arrow" src={download} />
+            : <LoaderSpinner />
+          }
+
+              <div className="fileSelectWrapper">
+
+              <p className="inner">{this.state.files.length == 0 ? "Drop a bank statement here or..." : "Loading..."}</p>
               {
-                this.state.files.length != 0 ? this.redirectPage() : null
+                // this.state.files.length != 0 ? this.redirectPage() : null
               }
               {/* <p className="inner">Drop a bank statement here! Or click to select...</p> */}
+              <FileSelector disableFunctionality={false} onSuccess={this.onDrop.bind(this)} />
+              </div>
             </Dropzone>
           </div>
         </section>

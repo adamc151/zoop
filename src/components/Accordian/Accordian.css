@@ -4,13 +4,6 @@
   margin-bottom: 10px;
 }
 
-.accordionTab {
-  /* max-width: 70%; */
-  /* margin: 0 auto; */
-  /* Add shadows to create the "card" effect */
-  /* box-shadow: 0 4px 15px 0 rgba(0,0,0,0.2); */
-}
-
 .openTabRadio, .closeTabRadio {
   position: absolute;
   left: 0;
@@ -59,6 +52,11 @@ label {
 .closeTabLabel {
   display: none;
   content: "+";
+  margin-bottom: 0px;
+}
+
+.openTabLabel {
+  margin-bottom: 0px;
 }
 
 .openTabLabel::after {
@@ -127,4 +125,67 @@ label::after {
 
 .greenClass{
   color: #16a085;
+}
+
+
+
+
+
+
+
+
+
+/* .accordianItemWrapper {
+  display: grid;
+  grid-template-columns: 20% auto 20% 5%;
+  align-items: start;
+  padding: 4px;
+} */
+
+/* .accordianItemWrapper:hover {
+    background-color: lightgrey;
+} */
+
+/* .itemLocation, .itemAmount {
+    text-align: start;
+} */
+
+/* .itemDate, .itemLocation, .itemAmount {
+  line-height: 2;
+} */
+
+
+.close-button {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    line-height: 3;
+    display: inline-block;
+}
+
+.close-button::before, .close-button::after{
+  transform: rotate(-45deg);
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12px;
+  display: block;
+  height: 2px;
+  width: 20px;
+  background-color: gray;
+}
+
+.close-button::after{
+  transform: rotate(-135deg);
+}
+
+.close-button:hover::before, .close-button:hover::after {
+  transition: all 0.25s ease-out;
+  transform: rotate(0deg);
+}
+
+.close-button:hover{
+  cursor: pointer;
 }

@@ -2,34 +2,48 @@
     width: 60%;
     min-width: 280px;
     margin: 0 auto;
-    margin-top: 100px;
-    /* display: flex;
-    flex-direction: row;
-    justify-content: space-around; */
 }
 
 .dropzoneBox{
     /* width: 60%; */
-    height: 500px;
+    height: 50%;
     border-style: dashed;
-    border-width: 4px;
-}
+    border-width: 2px;
+    border-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
 
 .dropzoneActive{
     background-color: #16a0846c;
 }
-  
+
 .inner {
     font-size: 25px;
-    padding: 20px;
 }
 
-.dropzoneBox p:hover{
-    color: #16a084c4;
+.dropzoneBox:hover{
 }
 
 .down_arrow{
-    width: 130px;
-    margin-top: 150px;
-    opacity: 0.7;
+  margin-top: 30px;
+  margin-bottom: 30px;
+    height: 90px;
+    width: 90px;
+    opacity: 0.5;
+}
+
+.santander_logo {
+  height: 120px;
+  width: 120px;
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 3px 3px 3px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.fileSelectWrapper{
+   max-width: 400px;
+   width: 90%;
 }
