@@ -23,7 +23,8 @@ export default function AccordianItem(props){
             <div>{dateString}</div>
           </Col>
           <Col md={1} lg={1}>
-            <div className="close-button" onClick={() => props.callback(props.index)}></div>
+            {/* <div className="close-button" onClick={() => props.callback(props.index)}></div> */}
+            <img className="close_icon" src={close_icon} onClick={() => props.callback(props.index)}/>
           </Col>
         </Row>
       </Grid>

@@ -60,8 +60,8 @@ class HowMuchPage extends React.Component {
   };
 
     filterCallback(transaction, inputLength, inputValue){
-      if(transaction.location !== null){
-        if(transaction.location.toLowerCase().slice(0, inputLength) === inputValue){
+      if(transaction.description !== null){
+        if(transaction.description.toLowerCase().includes(inputValue)){
           return true;
         } else {
           return false;
@@ -75,12 +75,12 @@ class HowMuchPage extends React.Component {
   // When suggestion is clicked, Autosuggest needs to populate the input
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
   // input value for every given suggestion.
-  getSuggestionValue = suggestion => suggestion.location;
+  getSuggestionValue = suggestion => suggestion.description;
 
   // Use your imagination to render suggestions.
   renderSuggestion = suggestion => (
     <div>
-      {suggestion.location}
+      {suggestion.description}
     </div>
   );
 
