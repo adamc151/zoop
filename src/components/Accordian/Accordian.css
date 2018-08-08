@@ -33,8 +33,8 @@ label {
   text-align: left;
 }
 
-.tab-content::-webkit-scrollbar { 
-  display: none; 
+.tab-content::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-contents-single{
@@ -121,38 +121,29 @@ label::after {
 
 .redClass{
   color: rgba(255, 30, 0, 0.801);
+  margin-left: 5px;
 }
 
 .greenClass{
   color: #16a085;
+  margin-left: 5px;
 }
 
-
-
-
-
-
-
-
-
-/* .accordianItemWrapper {
+.accordianItemWrapper {
   display: grid;
   grid-template-columns: 20% auto 20% 5%;
   align-items: start;
   padding: 4px;
-} */
+}
 
-/* .accordianItemWrapper:hover {
+.accordianItemWrapper:hover {
     background-color: lightgrey;
-} */
+}
 
-/* .itemLocation, .itemAmount {
+.itemLocation, .itemAmount, .itemDate, .greenClass, .redClass {
     text-align: start;
-} */
-
-/* .itemDate, .itemLocation, .itemAmount {
-  line-height: 2;
-} */
+    line-height: 2;
+}
 
 
 .close-button {

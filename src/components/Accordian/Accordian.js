@@ -28,23 +28,16 @@ class Accordian extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps', nextProps);
-        // this.setState(nextProps);
-    }
-
-
+  }
 
 
   render() {
-    console.log("re renderrr");
-
-
     return (
       <div className="accordionContainer">
         <div className="accordionTab">
 
-            <input id="openTab" type="radio" name="tabs1" className="openTabRadio" />
-            <input id="closeTab" type="radio" name="tabs1" className="closeTabRadio" />
+            {this.props.collapsable ? (<input id="openTab" type="radio" name="tabs1" className="openTabRadio" /> ) : null }
+            {this.props.collapsable ? (<input id="closeTab" type="radio" name="tabs1" className="closeTabRadio" /> ) : null }
 
             <label htmlFor="openTab" className="openTabLabel">Transactions</label>
             <label htmlFor="closeTab" className="closeTabLabel">Transactions</label>

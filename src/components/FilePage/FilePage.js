@@ -17,7 +17,7 @@ export default class FilePage extends React.Component {
     const { } = this.props;
 
     return (
-    <div>
+    <div className="uploadPage">
       <Grid fluid={true}>
 
         <Row className="show-grid">

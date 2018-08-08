@@ -38,15 +38,16 @@ export default class MainContainer extends React.Component {
     return (
       <Router>
         <div>
+          {/*
           <div className="navbar">
             <Link to="/"><a>Upload File</a></Link>
             <Link to="/Dashboard"><a>Dashboard</a></Link>
             <Link to="/HowMuch"><a>How Much?</a></Link>
-          </div>
-          
+          </div>*/}
+
           <Route exact path="/" component={FilePage} />
           <Route path="/Dashboard" component={GraphPage} />
-          <Route path="/HowMuch" component={HowMuchPage} />
+          {/*<Route path="/HowMuch" component={HowMuchPage} />*/}
 
           <br/>
           <br/>
