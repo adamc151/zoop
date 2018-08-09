@@ -143,6 +143,7 @@ label::after {
 .itemLocation, .itemAmount, .itemDate, .greenClass, .redClass {
     text-align: start;
     line-height: 2;
+    padding: 2px;
 }
 
 
