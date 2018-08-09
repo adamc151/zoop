@@ -47,7 +47,7 @@ export default function transactions(state = initialState, action) {
         case REMOVE_TRANSACTION:
             console.log("Remove transaction index ", action.payload);
             newState = removeTransaction(state.transactionsInRange, action.payload);
-            return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
+            return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet, monthlyTransactionsArray: newState.monthlyTransactions };
         case ADD_MONTHLY_TRANSACTIONS:
             console.log('ADD_MONTHLY_TRANSACTIONS Action');
             return { ...state, monthlyTransactionsArray: calculateMonthlyNetValues(action.payload, null)};
@@ -306,5 +306,8 @@ function removeTransaction(transactions, myIndex){
   total = Math.round(total * 100) / 100;
   output = output*-1;
 
-  return { transactionsInRange: newTransactions, inRangeIncome: input, inRangeSpending: output, inRangeNet: total };
+  var monthlyTransactions = calculateMonthlyNetValues(null, newTransactions);
+
+  return { transactionsInRange: newTransactions, inRangeIncome: input,
+    inRangeSpending: output, inRangeNet: total, monthlyTransactions: monthlyTransactions };
 }
