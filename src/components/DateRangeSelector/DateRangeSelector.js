@@ -66,7 +66,7 @@ class DateRangeSelector extends React.Component {
 
 
   render() {
-    
+
     return (
       <div className="DateRangeSelector">
 
@@ -89,6 +89,7 @@ class DateRangeSelector extends React.Component {
                 dateFormat="DD/MM/YYYY"
                 className="react-datepicker"
                 name="startDate"
+                readonly="true"
               />
             </Col>
             <Col xs={6} sm={6} md={6}>
@@ -100,6 +101,7 @@ class DateRangeSelector extends React.Component {
                 dateFormat="DD/MM/YYYY"
                 className="react-datepicker"
                 name="endDate"
+                readonly="true"
               />
             </Col>
           </Row>
