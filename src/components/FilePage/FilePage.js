@@ -6,27 +6,32 @@ import FileSelector from '../FileSelector/FileSelector.js';
 import {Grid, Row, Col} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './FilePage.css';
+import santander from './santanderJPG.jpg';
+
 
 export default class FilePage extends React.Component {
 
-  
+
   render() {
 
     const { } = this.props;
 
     return (
-    <div>
+    <div className="uploadPage">
       <Grid fluid={true}>
 
         <Row className="show-grid">
           <Col md={12} lg={12}>
-            <FileDrop />
+            <div className="banksContainer">
+              <p className="banksText">Supported Banks</p>
+              <img className="santander_logo" src={santander} />
+            </div>
           </Col>
         </Row>
-        
+
         <Row className="show-grid">
           <Col md={12} lg={12}>
-            <FileSelector />
+            <FileDrop />
           </Col>
         </Row>
 
@@ -34,11 +39,11 @@ export default class FilePage extends React.Component {
             <p>We NEVER store your financial data!  <i class="em em---1"></i></p>
         </div>
 
-        
+
 
 
       </Grid>
-      
+
     </div>);
   }
 

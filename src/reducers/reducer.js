@@ -1,4 +1,4 @@
-import { ADD_TRANSACTIONS, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS,
+import { ADD_TRANSACTIONS, REMOVE_TRANSACTION, GET_TRANSACTIONS_IN_RANGE, ADD_MONTHLY_TRANSACTIONS, UPDATE_MONTHLY_TRANSACTIONS,
     CLEAR_ACTION, ADD_MONTHLY_BALANCE_TRANSACTIONS, UPDATE_MONTHLY_BALANCE_TRANSACTIONS } from '../actions/actions';
 var moment = require('moment');
 moment().toDate();
@@ -44,6 +44,10 @@ export default function transactions(state = initialState, action) {
             console.log('GET_TRANSACTIONS_IN_RANGE Action');
             newState = getTransactionsInRange(state.allTransactions, action.payload);
             return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet };
+        case REMOVE_TRANSACTION:
+            console.log("Remove transaction index ", action.payload);
+            newState = removeTransaction(state.transactionsInRange, action.payload);
+            return { ...state, transactionsInRange: newState.transactionsInRange, income: newState.inRangeIncome, spending: newState.inRangeSpending, net: newState.inRangeNet, monthlyTransactionsArray: newState.monthlyTransactions };
         case ADD_MONTHLY_TRANSACTIONS:
             console.log('ADD_MONTHLY_TRANSACTIONS Action');
             return { ...state, monthlyTransactionsArray: calculateMonthlyNetValues(action.payload, null)};
@@ -64,8 +68,6 @@ export default function transactions(state = initialState, action) {
     }
 }
 
-
-
 //SELECTORSSSS
 //Just funcctions to manipulate the data before adding to the store (THESE DO ALL THE WORK basically)
 //Move to separate folder if gets too busy
@@ -81,9 +83,17 @@ function parseTransactionsFromTextFile(file){
 
         var transactionDate = moment(dateIndex[0], 'DD/MM/YYYY');
         transactionDate.isValid();
-        var transactionDescription = descriptionIndex[0].slice(13);
+        var transactionDescription = descriptionIndex[0].slice(13).split('(')[0].split(',')[0];
         var transactionAmount = parseFloat(amountIndex[0].slice(8));
         var transactionBalance = parseFloat(balanceIndex[0].slice(9));
+
+        var transactionLocation = null;
+        var locationIndex = transactionDescription.match(/CARD PAYMENT TO\s/);
+
+        if(locationIndex){
+          var locationEndIndex = transactionDescription.indexOf(',');
+          transactionLocation = transactionDescription.substring(16, locationEndIndex);
+        }
 
         file = file.slice(amountIndex.index + 1);
 
@@ -91,6 +101,7 @@ function parseTransactionsFromTextFile(file){
             date: transactionDate,
             dateString: transactionDate.format('DD/MM/YYYY'),
             description: transactionDescription,
+            location: transactionLocation,
             amount: transactionAmount,
             accumulative: 0,
             balance: transactionBalance
@@ -141,7 +152,7 @@ function updateMonthlyNetValues(transactions, rangeObject){
     var output = 0;
     var accumulative = 0;
     var transactionsInRange = [];
-  
+
     transactions.map(transaction => {
         if (transaction.date.isBetween(rangeObject.startDate, rangeObject.endDate, null, '[]')) {
             transactionsInRange.push(transaction);
@@ -158,7 +169,7 @@ function updateMonthlyBalance(transactions, rangeObject){
     var output = 0;
     var accumulative = 0;
     var transactionsInRange = [];
-  
+
     transactions.map(transaction => {
         if (transaction.date.isBetween(rangeObject.startDate, rangeObject.endDate, null, '[]')) {
             transactionsInRange.push(transaction);
@@ -183,10 +194,10 @@ function calculateMonthlyNetValues(file, transactions) {
     var total=0;
 
     transactions.forEach(function(element){
-        
+
         currentMonth = element.date.format('M');
         currentYear = element.date.format('Y');
-        
+
         if(currentMonth == prevMonth && element!=transactions[transactions.length-1]){
             total+=element.amount;
         }
@@ -204,7 +215,7 @@ function calculateMonthlyNetValues(file, transactions) {
 }
 
 function reverseAndAddDifference(monthValues){
-    
+
     // monthValues.reverse();
     var prev = monthValues[0].SavingsPerMonth;
     var total = 0;
@@ -221,7 +232,7 @@ function reverseAndAddDifference(monthValues){
     });
 
     return monthValues;
-    
+
     console.log(monthValues);
     console.log(total/(monthValues.length-2));
 }
@@ -238,13 +249,13 @@ function calculateMonthlyBalance(file, transactions) {
     var monthValues = [];
     var balance=0;
     var currentMonth=0;
-    
+
     transactions.forEach(function(element, index){
-        
+
         currentMonth = element.date.format('M');
         currentYear = element.date.format('Y');
         balance = element.balance;
-        
+
         if(currentMonth!=prevMonth)
         {
             monthValues.push({date: monthMap[currentMonth-1] + ' ' + currentYear, balance: balance});
@@ -253,4 +264,50 @@ function calculateMonthlyBalance(file, transactions) {
     });
 
     return monthValues;
+}
+
+
+function removeTransaction(transactions, myIndex){
+
+  var input = 0;
+  var output = 0;
+  var accumulative = 0;
+  var newTransactions = [];
+
+  // console.log("before: ", transactions[index]);
+  // console.log("before size: ", transactions.length);
+  // transactions.splice(index, 1);
+  // console.log("after: ", transactions[index]);
+  // console.log("after size: ", transactions.length);
+
+  //newTransactions = transactions.filter (item, index => index !== myIndex) // new array without 'b'
+  console.log("transactions size: ", transactions.length);
+
+
+  transactions.map((transaction, index) => {
+
+    if(index != myIndex){
+      newTransactions.push(transaction);
+    } else {
+      console.log("remove: ", transaction);
+    }
+  })
+
+  console.log("newTransactions size: ", newTransactions.length);
+
+  newTransactions.map(transaction => {
+      transaction.amount >= 0 ? input += transaction.amount : output += transaction.amount;
+      transaction.accumulative = accumulative+=transaction.amount;
+  });
+
+  input = Math.round(input * 100) / 100;
+  output = Math.round(output * 100) / 100;
+  var total = input + output;
+  total = Math.round(total * 100) / 100;
+  output = output*-1;
+
+  var monthlyTransactions = calculateMonthlyNetValues(null, newTransactions);
+
+  return { transactionsInRange: newTransactions, inRangeIncome: input,
+    inRangeSpending: output, inRangeNet: total, monthlyTransactions: monthlyTransactions };
 }

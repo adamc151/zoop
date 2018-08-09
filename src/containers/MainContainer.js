@@ -13,6 +13,7 @@ import FileDrop from '../components/FileDrop/FileDrop.js';
 import FileClear from '../components/FileClear/FileClear.js';
 import FilePage from '../components/FilePage/FilePage.js';
 import GraphPage from '../components/GraphPage/GraphPage.js';
+import HowMuchPage from '../components/HowMuchPage/HowMuchPage.js'
 import { Link } from 'react-router-dom';
 
 
@@ -37,79 +38,17 @@ export default class MainContainer extends React.Component {
     return (
       <Router>
         <div>
-            {/* <ul>
-            </ul> */}
-
-
+          {/*
           <div className="navbar">
             <Link to="/"><a>Upload File</a></Link>
             <Link to="/Dashboard"><a>Dashboard</a></Link>
-          </div>
-          
+            <Link to="/HowMuch"><a>How Much?</a></Link>
+          </div>*/}
+
           <Route exact path="/" component={FilePage} />
           <Route path="/Dashboard" component={GraphPage} />
+          {/*<Route path="/HowMuch" component={HowMuchPage} />*/}
 
-
-          
-
-
-
-
-
-
-          <Grid fluid={true}>
-
-
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <FileDrop />
-              </Col>
-            </Row> */}
-            
-            {/* <Row className="show-grid">
-              <Col md={6} lg={6}>
-                <FileSelector />
-              </Col>
-              <Col md={6} lg={6}>
-                <FileClear />
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <DateRangeSelector initialStartDate={initialStartDate} initialEndDate={initialEndDate}/>
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <Accordian transactions={transactions} />
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <Chart transactions={transactions} />
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={8}>
-                <MonthlyChart monthlyTransactions={monthlyTransactionsArray}/>
-              </Col>
-              <Col md={12} lg={4}>
-                <MonthlyBalanceChart monthlyBalanceTransactionsArray={monthlyBalanceTransactionsArray}/>
-              </Col>
-            </Row> */}
-
-            {/* <Row className="show-grid">
-              <Col md={12} lg={12}>
-                <InOutNet income={income} spending={spending} net={net} />
-              </Col>
-            </Row> */}
-
-          </Grid>
           <br/>
           <br/>
         </div>

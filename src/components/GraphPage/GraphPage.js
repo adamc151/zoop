@@ -14,7 +14,7 @@ import './GraphPage.css';
 
 class GraphPage extends React.Component {
 
-  
+
   render() {
 
     const { allTransactions, transactions, monthlyTransactionsArray, monthlyBalanceTransactionsArray, income, spending, net } = this.props;
@@ -38,16 +38,19 @@ class GraphPage extends React.Component {
         </Row>
 
         <Row className="show-grid">
-          <Col md={12} lg={12}>
-            <Accordian transactions={transactions} />
-          </Col>
-        </Row>
-
-        <Row className="show-grid">
-          <Col md={12} lg={12}>
+          <Col sm={12} md={12} lg={8}>
             <Chart transactions={transactions} />
           </Col>
+          <Row className="show-grid">
+            <Col sm={12} md={12} lg={4}>
+              <Accordian transactions={transactions} collapsable={false} />
+            </Col>
+              <Col md={12} lg={4}>
+              <InOutNet income={income} spending={spending} net={net} />
+            </Col>
+          </Row>
         </Row>
+
 
         <Row className="show-grid">
           <Col md={12} lg={8}>
@@ -58,11 +61,11 @@ class GraphPage extends React.Component {
           </Col>
         </Row>
 
-        <Row className="show-grid">
+        {/* <Row className="show-grid">
           <Col md={12} lg={12}>
             <InOutNet income={income} spending={spending} net={net} />
           </Col>
-        </Row>
+        </Row> */}
 
         <Row className="show-grid">
           <Col md={12} lg={12}>
@@ -71,7 +74,7 @@ class GraphPage extends React.Component {
         </Row>
 
       </Grid>
-      
+
     </div>);
   }
 
@@ -98,4 +101,3 @@ export default connect(
   mapStateToProps,
   null
 )(GraphPage);
-
