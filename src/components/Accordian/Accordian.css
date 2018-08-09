@@ -4,12 +4,12 @@
   margin-bottom: 10px;
 }
 
-.openTabRadio, .closeTabRadio {
+/* .openTabRadio, .closeTabRadio {
   position: absolute;
   left: 0;
   opacity: 0;
   z-index: -1;
-}
+} */
 
 label {
   position: relative;
@@ -59,13 +59,13 @@ label {
   margin-bottom: 0px;
 }
 
-.openTabLabel::after {
+/* .openTabLabel::after {
   content: "+";
-}
+} */
 
-.closeTabLabel::after {
+/* .closeTabLabel::after {
   content: "-";
-}
+} */
 
 /* :checked */
 .openTabRadio:checked ~ .tab-content {
